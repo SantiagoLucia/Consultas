@@ -1,0 +1,47 @@
+SET SERVEROUTPUT ON
+SET DEFINE OFF
+
+DECLARE
+V_REGISTROS_MODIFICADOS NUMBER (30);
+V_NUMERO_ESPERADO NUMBER (30);
+REG_ACT_EXCEPTION EXCEPTION;
+	
+BEGIN
+V_NUMERO_ESPERADO := 1;
+V_REGISTROS_MODIFICADOS := 0;		
+DBMS_OUTPUT.put_line ('***COMIENZA SCRIPT***');
+DBMS_OUTPUT.put_line ('Se esperan modificar '||v_numero_esperado ||' registros');
+	
+-- bloque update --
+
+--ACA VA EL UPDATE/INSERT/DELETE NO OLVIDARSE EL WHERE!!!!
+
+DBMS_OUTPUT.put_line ('Registros actualizados: ' || SQL%ROWCOUNT);
+v_registros_modificados := v_registros_modificados + SQL%ROWCOUNT;
+
+-- fin bloque update --
+
+IF (V_REGISTROS_MODIFICADOS != V_NUMERO_ESPERADO) THEN
+    RAISE REG_ACT_EXCEPTION;
+END IF;
+
+COMMIT; --!!!PARA EJECUTAR PASAR A COMMIT!!!
+DBMS_OUTPUT.put_line ('Se modificaron '||v_registros_modificados||' registros');
+DBMS_OUTPUT.put_line ('***COMMIT REALIZADO***');
+
+EXCEPTION
+WHEN REG_ACT_EXCEPTION THEN
+BEGIN
+    ROLLBACK;
+    DBMS_OUTPUT.put_line ('SE REALIZA ROLLBACK DE TRANSACCION: ');
+    DBMS_OUTPUT.put_line ('LA CANTIDAD DE REGISTROS MODIFICADOS NO COINCIDE CON LA ESPERADA ' || v_registros_modificados);
+END;
+		
+WHEN OTHERS THEN
+BEGIN
+    ROLLBACK;
+    DBMS_OUTPUT.put_line ('SE REALIZA ROLLBACK DE TRANSACCION: ');
+    DBMS_OUTPUT.put_line ('    ' || SUBSTR (SQLERRM,1, 200));
+END;
+
+END;
