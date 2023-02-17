@@ -1,0 +1,4 @@
+Aclarar que se debe crear en base a la consulta.
+Indicar el nombre de la vista.
+Indicar el SCHEMA (CONSULTAS_APP_REDIP) o el grupo que corresponda.
+Indicar los privilegios sobre la vista (que usuarios pueden acceder).

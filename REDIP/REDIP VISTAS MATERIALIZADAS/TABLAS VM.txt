@@ -1,0 +1,211 @@
+RCE_GED.RCE_CERTIFICADO:
+Contiene información referida a certificados.
+Se relaciona con 
+-RCE_MEDICO
+-RCE_PRESENTADO_ANTE
+
+RCE_GED.RCE_MEDICO:
+Contiene información referida a un personal de medicina.
+Se relaciona con
+-RCE_DEFUNCION
+-SYS_PROFESIONAL_MEDICINA
+-RCE_NACIMIENTO
+
+RCE_GED.RCE_PRESENTADO_ANTE:
+Contiene información referida al organismo ante quien se presenta un certificado.
+Se relaciona con
+-RCE_CERTIFICADO
+
+RCE_GED.RCE_REGISTRO:
+Tabla principal que contiene información referida a registros.
+Se relaciona con
+-RCE_ACTA_REGISTRO
+-SYS_SUBTIPO_REGISTRO
+-RCE_CONDICION_REGISTRO
+-RCE_DIGITAL
+-SYS_CIRCUNSCRIPCION
+-RCE_REGISTRO_PERSONA
+-RCE_DEFUNCION
+-RCE_CERTIFICADO
+-RCE_MATRIMONIO
+-RCE_NACIMIENTO
+-JBPM4_TASK
+-RCE_PAGO_REGISTRO
+-RCE_PAGO_REGISTRO_SIEP
+
+RCE_GED.RCE_PAGO_REGISTRO:
+Contiene información referida a pago de un registro.
+Se relaciona con
+-RCE_REGISTRO
+
+RCE_GED.RCE_PAGO_REGISTRO_SIEP:
+Contiene información relacionada a pagos de registro SIEP
+Se relaciona con
+-RCE_REGISTRO
+
+RCE_GED.RCE_MEDICO:
+Contiene información referida a un personal de medicina.
+Se relaciona con
+-RCE_CERTIFICADO
+-SYS_PROFESIONAL_MEDICINA
+-RCE_DEFUNCION
+-RCE_NACIMIENTO
+
+RCE_GED.RCE_ACTA_REGISTRO:
+Contiene toda la información referida a actas de registro.
+Se relaciona con
+-RCE_REGISTRO
+
+RCE_GED.RCE_REGISTRO_PERSONA:
+Contiene información de la función que cumple una persona involucrada en un registro.
+Se relaciona con
+-RCE_REGISTRO
+-RCE_PERSONA
+
+RCE_GED.RCE_PERSONA:
+Contiene los datos personales de la persona involucrada en un registro.
+Se relaciona con
+-RCE_REGISTRO_PERSONA
+-SYS_TIPO_DOCUMENTO
+-SYS_NACIONALIDAD
+-SYS_SEXO
+-RCE_DOMICILIO
+-SYS_ASENTAMIENTO
+
+RCE_GED.SYS_TIPO_DOCUMENTO:
+Contiene los tipos de documento soportados por REDIP para identificar a una persona.
+Se relaciona con
+-RCE_PERSONA
+
+RCE_GED.SYS_NACIONALIDAD:
+Contiene información referida a la nacionalidad de una persona.
+Se relaciona con
+-RCE_PERSONA
+
+RCE_GED.SYS_SEXO:
+Contiene los tipo de sexo soportados por REDIP para identificar a una persona.
+Se relaciona con
+-RCE_PERSONA
+
+RCE_GED.RCE_DOMICILIO:
+Contiene información referida a domicilios involucrados en registros.
+Se relaciona con
+-RCE_PERSONA
+-RCE_ESTABLECIMIENTO_SALUD
+
+RCE_GED.SYS_ASENTAMIENTO:
+Contiene la información referida a asentamientos involucrados en registros.
+Se relaciona con
+-RCE_PERSONA
+
+RCE_GED.SYS_SUBTIPO_REGISTRO:
+Contiene información referida a los subtipos de registros existentes.
+Se relaciona con
+-RCE_REGISTRO
+
+RCE_GED.RCE_CONDICION_REGISTRO:
+Contiene la condición actual de un registro.
+Se relaciona con
+-RCE_REGISTRO
+
+RCE_GED.SYS_TIPO_CONDICION:
+Contiene los tipo de condición en los que puede estar un registro.
+Se relaciona con
+-RCE_CONDICION_REGISTRO
+
+RCE_GED.RCE_OBSERVACIONES:
+Contiene todo tipo de observaciones cargadas en varias tablas relacionadas.
+
+RCE_GED.SYS_CIRCUNSCRIPCION:
+Contiene información de las delegaciones existentes.
+Se relaciona con
+-RCE_REGISTRO
+-EU_LOCALIDAD*
+-EU_DEPARTAMENTO*
+-EU_PROVINCIA*
+
+RCE_GED.EU_LOCALIDAD*:
+Contiene todas las localidades existentes.
+
+RCE_GED.EU_DEPARTAMENTO*:
+Contiene todos los departamentos existentes.
+
+RCE_GED.EU_PROVINCIA*:
+Contiene las provincias.
+
+RCE_GED.RCE_DEFUNCION:
+Contiene toda la información referida a la defunción de una persona.
+Se relaciona con:
+-RCE_REGISTRO
+-SYS_CLASIFICACION_ENFERMEDADES
+-RCE_DOMICILIO DOMICILIO_DEFUNCION
+-SYS_ESTABLECIMIENTO_SALUD
+-RCE_MEDICO
+
+RCE_GED.SYS_CLASIFICACION_ENFERMEDADES:
+Contiene el código y descripción de enfermedades existentes en la plataforma.
+-RCE_DEFUNCION
+
+RCE_GED.SYS_ESTABLECIMIENTO_SALUD:
+Contiene información referida a los establecimientos de salud disponibles en la plataforma.
+-RCE_DEFUNCION
+-RCE_LUGAR_NACIMIENTO
+-RCE_DOMICILIO
+
+RCE_GED.SYS_PROFESIONAL_MEDICINA:
+Contiene los tipos de profesión. (Médico/a, Obstétrico/a)
+Se relaciona con
+-RCE_MEDICO
+
+RCE_GED.JBPM4_TASK:
+Esta tabla es temporal, almacena información referida al estado actual del registro a nivel plataforma.
+Ej: Iniciar registro, verificar firmas, etc.
+Se relaciona con
+-RCE_REGISTRO
+
+RCE_GED.RCE_DIGITAL:
+Esta tabla relaciona un registro con la tabla RCE_DATO_TOPOGRAFICO.
+Se relaciona con
+-RCE_REGISTRO
+
+RCE_GED.RCE_DATO_TOPOGRAFICO:
+Contiene el dato topográfico de un registro.
+Se relaciona con
+-RCE_DIGITAL
+
+RCE_GED.RCE_MATRIMONIO:
+Contiene información referida a un registro de matrimonio.
+Se relaciona con
+-RCE_REGISTRO
+-RCE_CONVENCION_MATRIMONIAL
+
+RCE_GED.RCE_CONVENCION_MATRIMONIAL:
+Contiene información referida a convención matrimonial.
+Se relaciona con
+-RCE_MATRIMONIO
+
+RCE_GED.RCE_NACIDO:
+Contiene información referida al nacido registrado (peso, edad gestacional, etc)
+Se relaciona con
+-RCE_REGISTRO_PERSONA
+
+RCE_GED.RCE_NACIMIENTO:
+Contiene información relacionada con el registro de un nacimiento.
+Se relaciona con
+-RCE_REGISTRO
+-RCE_CERTIFICADO_MEDICO
+-RCE_LUGAR_NACIMIENTO
+-RCE_MEDICO
+
+RCE_GED.RCE_CERTIFICADO_MEDICO:
+Se relaciona con la tabla RCE_CERTIFICADO, contiene información específica de certificado médico.
+Se relaciona con
+-RCE_CERTIFICADO
+-RCE_NACIMIENTO
+
+RCE_GED.RCE_LUGAR_NACIMIENTO:
+Contiene la información referida al lugar de nacimiento.
+Se relaciona con
+-RCE_NACIMIENTO
+
+*Estas tablas pertenecen a Escritorio Unico, pero son accesibles desde el grupo RCE_GED.
