@@ -1,0 +1,30 @@
+SET SERVEROUTPUT ON
+SET DEFINE OFF
+
+DECLARE
+    TYPE Numero_Expediente_Type IS TABLE OF VARCHAR2(50);
+    t_numero_expediente Numero_Expediente_Type;
+    l_no_data_found EXCEPTION;
+    
+BEGIN
+
+    SELECT
+        EE.TIPO_DOCUMENTO||'-'||EE.ANIO||'-'||EE.NUMERO||'- -'||
+            EE.CODIGO_REPARTICION_ACTUACION||'-'||EE.CODIGO_REPARTICION_USUARIO
+    BULK COLLECT INTO t_numero_expediente
+    FROM EE_GED.EE_EXPEDIENTE_ELECTRONICO EE
+    WHERE EE.FECHA_CREACION > TRUNC(SYSDATE)
+    ORDER BY EE.FECHA_CREACION DESC
+    FETCH FIRST 10 ROWS ONLY;
+    
+    FOR i IN 1..t_numero_expediente.COUNT
+    LOOP
+        DBMS_OUTPUT.PUT_LINE(t_numero_expediente(i));
+    END LOOP;
+
+EXCEPTION
+WHEN NO_DATA_FOUND THEN
+    BEGIN    
+        DBMS_OUTPUT.PUT_LINE('NO SE ENCONTRÓ EL EXPEDIENTE');
+    END;
+END;    

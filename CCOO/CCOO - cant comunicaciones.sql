@@ -1,9 +1,13 @@
-select
-sum(case when dest.fecha_eliminacion_bandeja is null then 1 end) en_bandeja,
-sum(case when dest.leido is null and dest.fecha_eliminacion_bandeja is null then 1 end) sin_leer,
-sum(case when dest.leido is not null and dest.fecha_eliminacion_bandeja is null then 1 end) leidas
-from
-gedo_ged.ccoo_comunicacion_destino dest
-inner join gedo_ged.ccoo_comunicacion com on dest.id_comunicacion = com.id
-where
-dest.nombre_usuario = 'SPRIVITERA'
+/* CANTIDAD DE COMUNICACIONES EN BANDEJA Y ESTADO */
+
+SELECT
+   SUM(CASE WHEN dest.fecha_eliminacion_bandeja IS NULL THEN 1 ELSE 0 END) en_bandeja,
+   SUM(CASE WHEN dest.leido IS NULL AND dest.fecha_eliminacion_bandeja IS NULL THEN 1 ELSE 0 END) sin_leer,
+   SUM(CASE WHEN dest.leido IS NOT NULL AND dest.fecha_eliminacion_bandeja IS NULL THEN 1 ELSE 0 END) leidas
+
+FROM
+   gedo_ged.ccoo_comunicacion_destino dest
+   INNER JOIN gedo_ged.ccoo_comunicacion com ON dest.id_comunicacion = com.id
+
+WHERE
+dest.nombre_usuario = 'SPRIVITERA';
