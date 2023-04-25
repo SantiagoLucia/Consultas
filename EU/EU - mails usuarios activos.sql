@@ -1,24 +1,30 @@
-SELECT
-    DISTINCT U.USUARIO,
-    U.MAIL AS "MAIL USUARIOS ACTIVOS"
+SELECT 
+   u.usuario,
+   u.mail AS mail_usuarios_activos
 
-FROM GEDO_GED.GEDO_HISTORIAL GH
-INNER JOIN CO_GED.DATOS_USUARIO U ON GH.USUARIO = U.USUARIO
-LEFT  JOIN  CO_GED.CARGOS C ON C.ID = U.CARGO
-INNER JOIN TRACK_GED.SADE_SECTOR_USUARIO S ON S.NOMBRE_USUARIO = U.USUARIO
+FROM gedo_ged.gedo_historial gh
+INNER JOIN co_ged.datos_usuario u 
+   ON gh.usuario = u.usuario
+INNER JOIN track_ged.sade_sector_usuario s 
+   ON s.nombre_usuario = u.usuario
 
-WHERE S.ESTADO_REGISTRO = 1 AND U.ACEPTACION_TYC = 1
+WHERE 
+   s.estado_registro = 1 
+   AND u.aceptacion_tyc = 1
 
 UNION
 
-SELECT
-    DISTINCT U.USUARIO,
-    U.MAIL AS "MAIL USUARIOS ACTIVOS"
+SELECT 
+   u.usuario,
+   u.mail AS mail_usuarios_activos
 
-FROM EE_GED.HISTORIALOPERACION HO
-INNER JOIN CO_GED.DATOS_USUARIO U ON HO.USUARIO = U.USUARIO
-LEFT  JOIN  CO_GED.CARGOS C ON C.ID = U.CARGO
-INNER JOIN TRACK_GED.SADE_SECTOR_USUARIO S ON S.NOMBRE_USUARIO = U.USUARIO
+FROM ee_ged.historialoperacion ho
+INNER JOIN co_ged.datos_usuario u 
+   ON ho.usuario = u.usuario
+INNER JOIN track_ged.sade_sector_usuario s 
+   ON s.nombre_usuario = u.usuario
 
-WHERE S.ESTADO_REGISTRO = 1 AND U.ACEPTACION_TYC = 1
-;
+WHERE 
+   s.estado_registro = 1 
+   AND u.aceptacion_tyc = 1
+;   

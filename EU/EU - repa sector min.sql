@@ -1,18 +1,24 @@
 SELECT
-    MINIS.CODIGO_REPARTICION AS CODIGO_MINISTERIO,
-    MINIS.NOMBRE_REPARTICION AS NOMBRE_MINISTERIO,
-    REPA.CODIGO_REPARTICION AS CODIGO_REPARTICION,
-    REPA.NOMBRE_REPARTICION,    
-    SI.CODIGO_SECTOR_INTERNO,
-    SI.NOMBRE_SECTOR_INTERNO,
-    REPA.VIGENCIA_DESDE,
-    REPA.VIGENCIA_HASTA
+   minis.codigo_reparticion AS codigo_ministerio,
+   minis.nombre_reparticion AS nombre_ministerio,
+   repa.codigo_reparticion AS codigo_reparticion,
+   repa.nombre_reparticion,    
+   si.codigo_sector_interno,
+   si.nombre_sector_interno,
+   repa.vigencia_desde,
+   repa.vigencia_hasta
     
 FROM 
-TRACK_GED.SADE_SECTOR_INTERNO SI
-INNER JOIN TRACK_GED.SADE_REPARTICION REPA ON REPA.ID_REPARTICION = SI.CODIGO_REPARTICION
-INNER JOIN  TRACK_GED.SADE_REPARTICION MINIS ON MINIS.ID_REPARTICION = REPA.MINISTERIO
+track_ged.sade_sector_interno si
+INNER JOIN track_ged.sade_reparticion repa 
+   ON repa.id_reparticion = si.codigo_reparticion
+INNER JOIN track_ged.sade_reparticion minis 
+   ON minis.id_reparticion = repa.ministerio
 
-WHERE REPA.ESTADO_REGISTRO = 1 AND MINIS.ESTADO_REGISTRO = 1 AND
-TRUNC(REPA.VIGENCIA_HASTA) > TRUNC(SYSDATE) AND TRUNC(MINIS.VIGENCIA_HASTA) > TRUNC(SYSDATE)
-ORDER BY MINIS.NOMBRE_REPARTICION, REPA.NOMBRE_REPARTICION
+WHERE 
+   repa.estado_registro = 1 
+   AND minis.estado_registro = 1 
+   AND repa.vigencia_hasta > sysdate
+   AND minis.vigencia_hasta > sysdate
+
+ORDER BY minis.nombre_reparticion, repa.nombre_reparticion;

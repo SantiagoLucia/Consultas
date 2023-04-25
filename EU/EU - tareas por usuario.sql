@@ -1,53 +1,74 @@
 --tareas GEDO--
 SELECT
-S.NOMBRE_USUARIO AS "USUARIO",
-DU.APELLIDO_NOMBRE AS "NOMBRE APELLIDO",
-C.CARGO,
-R.CODIGO_REPARTICION AS "CODIGO REPARTICION",
-R.NOMBRE_REPARTICION AS "NOMBRE REPARTICION",
-R1.CODIGO_REPARTICION AS "CODIGO MINISTERIO",
-R1.NOMBRE_REPARTICION AS "NOMBRE MINISTERIO",
-COUNT( CASE WHEN TASK.NAME_ = 'Revisar Documento' OR TASK.NAME_ = 'Revisar Documento con Firma Conjunta' THEN 1 END ) AS "REVISAR DOCUMENTO",
-COUNT( CASE WHEN TASK.NAME_ = 'Confeccionar Documento' THEN 1 END ) AS "CONFECCIONAR DOCUMENTO",
-COUNT( CASE WHEN TASK.NAME_ = 'Rechazado' then 1 END ) AS "RECHAZAR DOCUMENTO",
-COUNT( CASE WHEN TASK.NAME_ = 'Firmar Documento' THEN 1 END ) AS "FIRMAR DOCUMENTO",
-COUNT (CASE WHEN TASK.NAME_ = 'Revisar Documento' OR TASK.NAME_ = 'Revisar Documento con Firma Conjunta'
-    OR TASK.NAME_ = 'Confeccionar Documento' OR TASK.NAME_ = 'Firmar Documento' OR TASK.NAME_ = 'Rechazado' THEN 1 END ) as TOTAL
+   s.nombre_usuario as usuario,
+   du.apellido_nombre AS nombre_apellido,
+   c.cargo,
+   r.codigo_reparticion AS codigo_reparticion,
+   r.nombre_reparticion AS nombre_reparticion,
+   r1.codigo_reparticion AS codigo_ministerio,
+   r1.nombre_reparticion AS nombre_ministerio,
+   
+   COUNT(
+      CASE 
+         WHEN task.name_ = 'Revisar Documento' 
+           OR task.name_ = 'Revisar Documento con Firma Conjunta' 
+         THEN 1 
+      END) AS revisar_documento,
+   
+   COUNT( 
+      CASE 
+         WHEN task.name_ = 'Confeccionar Documento' 
+         THEN 1 
+      END) AS confeccionar_documento,
+   
+   COUNT( 
+      CASE 
+         WHEN task.name_ = 'Rechazado' 
+         THEN 1 
+      END) AS rechazar_documento,
+   
+   COUNT( 
+      CASE 
+         WHEN task.name_ = 'Firmar Documento' 
+         THEN 1 
+      END) AS firmar_documento,
+   
+   COUNT(
+      CASE 
+         WHEN task.name_ = 'Revisar Documento' 
+           OR task.name_ = 'Revisar Documento con Firma Conjunta'
+           OR task.name_ = 'Confeccionar Documento' 
+           OR task.name_ = 'Firmar Documento' 
+           OR task.name_ = 'Rechazado' 
+         THEN 1 
+      END) AS total
 
-FROM GEDO_GED.JBPM4_TASK TASK
-LEFT OUTER JOIN CO_GED.DATOS_USUARIO DU ON DU.USUARIO = TASK.ASSIGNEE_
-LEFT OUTER JOIN CO_GED.CARGOS C ON (DU.CARGO = C.ID)
-LEFT OUTER JOIN TRACK_GED.SADE_SECTOR_USUARIO S ON S.NOMBRE_USUARIO = DU.USUARIO
-LEFT OUTER JOIN TRACK_GED.SADE_SECTOR_INTERNO SI ON SI.ID_SECTOR_INTERNO = S.ID_SECTOR_INTERNO
-LEFT OUTER JOIN TRACK_GED.SADE_REPARTICION R ON R.ID_REPARTICION = SI.CODIGO_REPARTICION
-LEFT OUTER JOIN  TRACK_GED.SADE_REPARTICION R1 ON R1.ID_REPARTICION = R.MINISTERIO
+FROM gedo_ged.jbpm4_task task
+LEFT OUTER JOIN co_ged.datos_usuario du 
+   ON du.usuario = task.assignee_
+LEFT OUTER JOIN co_ged.cargos c 
+   ON du.cargo = c.id
+LEFT OUTER JOIN track_ged.sade_sector_usuario s 
+   ON s.nombre_usuario = du.usuario
+LEFT OUTER JOIN track_ged.sade_sector_interno si 
+   ON si.id_sector_interno = S.id_sector_interno
+LEFT OUTER JOIN track_ged.sade_reparticion r 
+   ON r.id_reparticion = si.codigo_reparticion
+LEFT OUTER JOIN  track_ged.sade_reparticion r1 
+   ON r1.id_reparticion = R.ministerio
 
-WHERE R.CODIGO_REPARTICION = 'HIEPMSALGP'
-AND S.ESTADO_REGISTRO = 1
-AND TO_CHAR(TASK.CREATE_,'yyyy-mm') = TO_CHAR(SYSDATE,'yyyy-mm')
-GROUP BY (S.NOMBRE_USUARIO,DU.APELLIDO_NOMBRE,C.CARGO,R.CODIGO_REPARTICION,R.NOMBRE_REPARTICION
-,R1.CODIGO_REPARTICION,R1.NOMBRE_REPARTICION)
-ORDER BY (S.NOMBRE_USUARIO);
+WHERE r.codigo_reparticion = 'DIPMJGM'
+  AND s.estado_registro = 1
 
+GROUP BY 
+   s.nombre_usuario,
+   du.apellido_nombre,
+   c.cargo,
+   r.codigo_reparticion,
+   r.nombre_reparticion,
+   r1.codigo_reparticion,
+   r1.nombre_reparticion
 
--------------------------------------------
-
---tareas EE--
-
-
-
--------------------------------------------
-
-SELECT DISTINCT NAME_ FROM GEDO_GED.JBPM4_TASK task
-LEFT OUTER JOIN TRACK_GED.SADE_SECTOR_USUARIO S ON S.NOMBRE_USUARIO = task.assignee_
-LEFT OUTER JOIN TRACK_GED.SADE_SECTOR_INTERNO SI ON SI.ID_SECTOR_INTERNO = S.ID_SECTOR_INTERNO
-LEFT OUTER JOIN TRACK_GED.SADE_REPARTICION R ON R.ID_REPARTICION = SI.CODIGO_REPARTICION
-LEFT OUTER JOIN  TRACK_GED.SADE_REPARTICION R1 ON R1.ID_REPARTICION = R.MINISTERIO
-where r.codigo_reparticion = 'HIEPMSALGP';
-
-SELECT DISTINCT NAME_ FROM EE_GED.JBPM4_TASK task
-LEFT OUTER JOIN TRACK_GED.SADE_SECTOR_USUARIO S ON S.NOMBRE_USUARIO = task.assignee_
-LEFT OUTER JOIN TRACK_GED.SADE_SECTOR_INTERNO SI ON SI.ID_SECTOR_INTERNO = S.ID_SECTOR_INTERNO
-LEFT OUTER JOIN TRACK_GED.SADE_REPARTICION R ON R.ID_REPARTICION = SI.CODIGO_REPARTICION
-LEFT OUTER JOIN  TRACK_GED.SADE_REPARTICION R1 ON R1.ID_REPARTICION = R.MINISTERIO
-where r.codigo_reparticion = 'HIEPMSALGP';
+ORDER BY 
+   s.nombre_usuario
+;
