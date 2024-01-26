@@ -1,19 +1,20 @@
-SELECT
-    EE.ID ID_EXP,
-    EE.TIPO_DOCUMENTO||'-'||EE.ANIO||'-'||EE.NUMERO||'-'||EE.CODIGO_REPARTICION_ACTUACION||'-'||EE.CODIGO_REPARTICION_USUARIO AS NRO_EXPEDIENTE,
-    COUNT(*) AS CANTIDAD_DOCUMENTOS,
-    ROUND(SUM(GD.PESO)/1024/1024,2) AS PESO_TOTAL_MB 
-
-FROM
-    EE_GED.EE_EXPEDIENTE_ELECTRONICO EE
-    INNER JOIN EE_GED.EE_EXPEDIENTE_DOCUMENTOS ED ON EE.ID = ED.ID
-    INNER JOIN EE_GED.DOCUMENTO D ON ED.ID_DOCUMENTO = D.ID
-    INNER JOIN GEDO_GED.GEDO_DOCUMENTO GD ON D.NUMERO_SADE = GD.NUMERO
-
-WHERE
-    EE.ID = 1569742
-
-GROUP BY 
-EE.ID,
-EE.TIPO_DOCUMENTO||'-'||EE.ANIO||'-'||EE.NUMERO||'-'||EE.CODIGO_REPARTICION_ACTUACION||'-'||EE.CODIGO_REPARTICION_USUARIO
-;
+select 
+nro_expediente,
+documento,
+-- count(*) as cantidad,
+round(sum(peso_bytes/1024/1024),2) as peso_megas
+from (
+   select
+       ee.tipo_documento||'-'||ee.anio||'-'||ee.numero||'-'||
+         ee.codigo_reparticion_actuacion||'-'||ee.codigo_reparticion_usuario as nro_expediente,
+       gd.numero as documento,  
+       gd.peso as peso_bytes
+   from
+       ee_ged.ee_expediente_electronico ee
+       inner join ee_ged.ee_expediente_documentos ed on ee.id = ed.id
+       inner join ee_ged.documento d on ed.id_documento = d.id
+       inner join gedo_ged.gedo_documento gd on d.numero_sade = gd.numero
+   where
+       ee.id = 4210814
+)
+group by rollup(nro_expediente, documento)
