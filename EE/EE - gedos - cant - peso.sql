@@ -1,12 +1,8 @@
-select 
-nro_expediente,
-documento,
--- count(*) as cantidad,
-round(sum(peso_bytes/1024/1024),2) as peso_megas
-from (
+with expediente_documentos as (
    select
        ee.tipo_documento||'-'||ee.anio||'-'||ee.numero||'-'||
-         ee.codigo_reparticion_actuacion||'-'||ee.codigo_reparticion_usuario as nro_expediente,
+         ee.codigo_reparticion_actuacion||'-'||ee.codigo_reparticion_usuario 
+         as nro_expediente,
        gd.numero as documento,  
        gd.peso as peso_bytes
    from
@@ -17,4 +13,12 @@ from (
    where
        ee.id = 4210814
 )
-group by rollup(nro_expediente, documento)
+
+select 
+   nro_expediente,
+   documento,
+   count(*) as cantidad,
+   round(sum(peso_bytes/1024/1024),2) as peso_megas
+
+from expediente_documentos
+group by rollup(nro_expediente, documento);
