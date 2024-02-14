@@ -1,27 +1,27 @@
-﻿SELECT
-EE.TIPO_DOCUMENTO||'-'||EE.ANIO||'-'||EE.NUMERO||'- -'||EE.CODIGO_REPARTICION_ACTUACION||'-'||EE.CODIGO_REPARTICION_USUARIO AS NRO_EXPEDIENTE,
-EE.FECHA_CREACION AS FECHA_CARATULACION, 
-H.TIPO_OPERACION,
-H.FECHA_OPERACION,
-H.MOTIVO,
-H.USUARIO AS USUARIO_ORIGEN,
-H.REPARTICION_USUARIO AS COD_REPARTICION_ORIGEN,
-H.DESCRIPCION_REPARTICION_ORIGEN AS NOMBRE_REPARTICION_ORIGEN,
-H.CODIGO_JURISDICCION_ORIGEN AS COD_MINISTERIO_ORIGEN,
-H.DESTINATARIO AS USUARIO_REPA_DESTINO,
-H.CODIGO_REPARTICION_DESTINO AS COD_REPARTICION_DESTINO,
-H.DESCRIPCION_REPARTICION_DESTIN AS NOMBRE_REPARTICION_DESTINO,
-H.CODIGO_JURISDICCION_DESTINO AS COD_MINISTERIO_DESTINO
+﻿select
+case when h.expediente is not null then
+   'ex'||'-'||regexp_substr(h.expediente,'[0-9]{4}',3)||'-'||
+   regexp_substr(h.expediente,'[0-9]{1,8}',7) ||'- -'||
+   'GDEBA' || regexp_substr(h.expediente,'-.+') end as nro_expediente,
+h.tipo_operacion,
+h.fecha_operacion,
+h.motivo,
+h.usuario as usuario_origen,
+h.reparticion_usuario as cod_reparticion_origen,
+h.descripcion_reparticion_origen as nombre_reparticion_origen,
+h.codigo_jurisdiccion_origen as cod_ministerio_origen,
+h.destinatario as usuario_repa_destino,
+h.codigo_reparticion_destino as cod_reparticion_destino,
+h.descripcion_reparticion_destin as nombre_reparticion_destino,
+h.codigo_jurisdiccion_destino as cod_ministerio_destino
 
-FROM
-EE_GED.HISTORIALOPERACION H
-INNER JOIN EE_GED.EE_EXPEDIENTE_ELECTRONICO EE ON EE.ID = H.ID_EXPEDIENTE
+from
+ee_ged.historialoperacion h
 
-WHERE 
-H.FECHA_OPERACION >= TO_DATE('07/08/2020', 'DD/MM/YYYY')
-AND H.TIPO_OPERACION = 'Pase'
-AND H.CODIGO_JURISDICCION_ORIGEN = 'IVMIYSPGP'
-AND H.CODIGO_JURISDICCION_DESTINO = 'CGP'
+where 
+h.fecha_operacion >= trunc(sysdate, 'MONTH')
+and h.tipo_operacion = 'Pase'
+and h.codigo_jurisdiccion_destino = 'CGP'
 
-ORDER BY H.FECHA_OPERACION ASC
+order by h.fecha_operacion asc
 ;
