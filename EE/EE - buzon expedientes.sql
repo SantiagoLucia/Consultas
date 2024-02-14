@@ -1,26 +1,16 @@
-SELECT
-T.ASSIGNEE_ AS USUARIO,
-DU.APELLIDO_NOMBRE AS NOMBRE_APELLIDO,
-EE.TIPO_DOCUMENTO || '-' || EE.ANIO || '-' || EE.NUMERO || '-' || EE.CODIGO_REPARTICION_ACTUACION || '-' || EE.CODIGO_REPARTICION_USUARIO AS NRO_EXPEDIENTE,
-TO_CHAR(EE.FECHA_CREACION,'DD/MM/YYYY') AS FECHA_CARATULACION,
-TO_CHAR(EE.FECHA_MODIFICACION,'DD/MM/YYYY') AS ULTIMA_MODIFICACION,
-EE.ESTADO
+select
+t.assignee_ as usuario,
+du.apellido_nombre as nombre_apellido,
+ee.tipo_documento || '-' || ee.anio || '-' || ee.numero || '-' || 
+	ee.codigo_reparticion_actuacion || '-' || ee.codigo_reparticion_usuario as nro_expediente,
+to_char(ee.fecha_creacion,'dd/mm/yyyy') as fecha_caratulacion,
+to_char(ee.fecha_modificacion,'dd/mm/yyyy') as ultima_modificacion,
+ee.estado
 
-FROM EE_GED.JBPM4_TASK T
-INNER JOIN EE_GED.EE_EXPEDIENTE_ELECTRONICO EE ON EE.ID_WORKFLOW = T.EXECUTION_ID_
-LEFT JOIN CO_GED.DATOS_USUARIO DU ON DU.USUARIO = REGEXP_SUBSTR(ASSIGNEE_, '[^.]+', 1, 1)
-WHERE
-REGEXP_SUBSTR(ASSIGNEE_, '[^.]+', 1, 1) IN (
-'SVARGAS',
-'PDIAS',
-'MASANCHEZ',
-'MQUINTAVALLE',
-'NNAVAS',
-'LPELITTI',
-'CDEFELITTO',
-'CBARRETO',
-'MVILLANUEVA',
-'MBERTERRETCHE'
-)
+from ee_ged.jbpm4_task t
+inner join ee_ged.ee_expediente_electronico ee on ee.id_workflow = t.execution_id_
+left join co_ged.datos_usuario du on du.usuario = regexp_substr(assignee_, '[^.]+')
+where
+regexp_substr(assignee_, '[^.]+') in ('CBARRETO')
 
-ORDER BY T.ASSIGNEE_;
+order by t.assignee_;

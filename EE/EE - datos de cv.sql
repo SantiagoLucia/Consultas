@@ -1,26 +1,34 @@
-SELECT 
-    EEDOC.NUMERO_SADE, 
-    EEDOC.NOMBRE_USUARIO_GENERADOR,
-    TO_CHAR(EEDOC.FECHA_CREACION, 'YYYY/MM/DD') AS "FECHA_CREACION",
-    TO_CHAR(EEDOC.FECHA_CREACION, 'HH24:MM') AS "HORA_CREACION",
-    LISTAGG(DFVALUE.INPUT_NAME || ' : ' || DFVALUE.VALUE_STR || DFVALUE.VALUE_INT , ' | ') WITHIN GROUP (ORDER BY DFVALUE.ID_FORM_COMPONENT) AS "VALORES_CARATULA",
-    (EE.TIPO_DOCUMENTO || '-' || EE.ANIO || '-' || LPAD(EE.NUMERO, 8, '0') || '-' || EE.CODIGO_REPARTICION_ACTUACION || '-' || EE.CODIGO_REPARTICION_USUARIO ) AS EXPEDIENTE,
-    EE.USUARIO_CREADOR
-    
-FROM 
-    EE_GED.DOCUMENTO EEDOC
-    JOIN GEDO_GED.DF_FORM_COMP_VALUE DFVALUE ON DFVALUE.ID_TRANSACTION = EEDOC.ID_TRANSACCION_FC
-    JOIN EE_GED.EE_EXPEDIENTE_DOCUMENTOS EEDOCS ON EEDOCS.ID_DOCUMENTO = EEDOC.ID
-    JOIN EE_GED.EE_EXPEDIENTE_ELECTRONICO EE ON EE.ID = EEDOCS.ID
-    JOIN EE_GED.TRATA EETRATA ON EETRATA.ID = EE.ID_TRATA
+select * from (
+select 
+    eedoc.numero_sade, 
+    eedoc.nombre_usuario_generador,
+    to_char(eedoc.fecha_creacion, 'yyyy/mm/dd') as fecha_creacion,
+    to_char(eedoc.fecha_creacion, 'hh24:mm') as hora_creacion,
+    ee.tipo_documento||'-'||ee.anio||'-'||ee.numero||'-'||
+        ee.codigo_reparticion_actuacion||'-'||ee.codigo_reparticion_usuario as expediente,
+    ee.usuario_creador,
+    dfvalue.input_name,
+    dfvalue.value_str || dfvalue.value_int as input_value
 
-WHERE  
-    EETRATA.CODIGO_TRATA = 'SLYT0006'
-    AND eetrata.acronimo_doc_gedo = 'CVOJU'
+from 
+ee_ged.ee_expediente_electronico ee
+inner join ee_ged.trata eetrata on eetrata.id = ee.id_trata
+inner join ee_ged.ee_expediente_documentos eedocs on ee.id = eedocs.id
+inner join ee_ged.documento eedoc on eedocs.id_documento = eedoc.id
+inner join gedo_ged.df_form_comp_value dfvalue on dfvalue.id_transaction = eedoc.id_transaccion_fc
 
-GROUP BY 
-    EEDOC.NUMERO_SADE, 
-    EEDOC.NOMBRE_USUARIO_GENERADOR, 
-    EEDOC.FECHA_CREACION, 
-    (EE.TIPO_DOCUMENTO || '-' || EE.ANIO || '-' || LPAD(EE.NUMERO, 8, '0') || '-' || EE.CODIGO_REPARTICION_ACTUACION || '-' || EE.CODIGO_REPARTICION_USUARIO ), 
-    EE.USUARIO_CREADOR;
+where  
+    eetrata.codigo_trata = 'SLYT0006'
+    and eetrata.acronimo_doc_gedo = 'CVOJU'
+	and ee.fecha_creacion > trunc(sysdate)
+)
+pivot(max(input_value) for input_name in (
+    'tematicadelacausa' as tematicadelacausa,
+    'nombreactor' as nombreactor,
+    'nombredemandado' as nombredemandado,
+    'tematica' as tematica,
+    'ndeexpedientejudicial' as ndeexpedientejudicial,
+    'Sseparador' as Sseparador,
+    'tribunalojuzgado' as tribunalojuzgado,
+    'Scaratula' as Scaratula
+));
