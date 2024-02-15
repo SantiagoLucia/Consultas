@@ -1,44 +1,44 @@
-SELECT
-    EA2.ID_CODIGO_CARATULA AS ID_EXPEDIENTE_ASOCIADO,
-    EA1.POSICION,
-    EA2.FECHA_ASOCIACION,
-    EA2.TIPO_DOCUMENTO||'-'||EA2.ANIO||'-'||EA2.NUMERO ||'- -GDEBA-'||EA2.CODIGO_REPARTICION_USUARIO AS EXPEDIENTE_ASOCIADO,
-    COUNT(*) CANTIDAD_DOCUMENTOS,
-    EEA.ID_TRATA,
-    EEA.ID_WORKFLOW,
-    EEA.ESTADO,
-    EEA.SISTEMA_CREADOR,
-    EEA.SISTEMA_APODERADO,
-    T.ASSIGNEE_
+select
+    ea2.id_codigo_caratula as id_expediente_asociado,
+    ea1.posicion,
+    ea2.fecha_asociacion,
+    ea2.tipo_documento||'-'||ea2.anio||'-'||ea2.numero ||'- -GDEBA-'||ea2.codigo_reparticion_usuario as expediente_asociado,
+    count(*) cantidad_documentos,
+    eea.id_trata,
+    eea.id_workflow,
+    eea.estado,
+    eea.sistema_creador,
+    eea.sistema_apoderado,
+    t.assignee_
     
     
-FROM EE_GED.EE_EXPEDIENTE_ELECTRONICO EE
-LEFT JOIN EE_GED.EE_EXPEDIENTE_ASOCIADO EA1 ON EE.ID = EA1.ID
-LEFT JOIN EE_GED.EXPEDIENTEASOCIADO EA2 ON EA1.ID_EXPEDIENTEASOCIADO = EA2.ID
-LEFT JOIN EE_GED.EE_EXPEDIENTE_DOCUMENTOS ED ON EA2.ID = ED.ID
-LEFT JOIN EE_GED.DOCUMENTO D ON ED.ID_DOCUMENTO = D.ID
+from ee_ged.ee_expediente_electronico ee
+left join ee_ged.ee_expediente_asociado ea1 on ee.id = ea1.id
+left join ee_ged.expedienteasociado ea2 on ea1.id_expedienteasociado = ea2.id
+left join ee_ged.ee_expediente_documentos ed on ea2.id = ed.id
+left join ee_ged.documento d on ed.id_documento = d.id
 
-LEFT JOIN EE_GED.EE_EXPEDIENTE_ELECTRONICO EEA ON EEA.ID = EA2.ID_CODIGO_CARATULA
-LEFT JOIN EE_GED.JBPM4_TASK T ON T.EXECUTION_ID_ = EEA.ID_WORKFLOW
-LEFT JOIN EE_GED.JBPM4_PARTICIPATION P ON P.TASK_ = T.DBID_
+left join ee_ged.ee_expediente_electronico eea on eea.id = ea2.id_codigo_caratula
+left join ee_ged.jbpm4_task t on t.execution_id_ = eea.id_workflow
+left join ee_ged.jbpm4_participation p on p.task_ = t.dbid_
 
-WHERE 
---POR NRO EXPEDIENTE MADRE
-EE.TIPO_DOCUMENTO||'-'||EE.ANIO||'-'||EE.NUMERO||'- -GDEBA-'||EE.CODIGO_REPARTICION_USUARIO = 'EX-2019-15837994- -GDEBA-HZGADIGIMSALGP'
-AND EE.ES_CABECERA_TC = 1 AND EA2.DEFINITIVO = 1
+where 
+--por nro expediente madre
+ee.tipo_documento||'-'||ee.anio||'-'||ee.numero||'- -GDEBA-'||ee.codigo_reparticion_usuario = 'EX-2019-15837994- -GDEBA-HZGADIGIMSALGP'
+and ee.es_cabecera_tc = 1 and ea2.definitivo = 1
 
-GROUP BY
-EA2.ID_CODIGO_CARATULA,
-EA2.TIPO_DOCUMENTO||'-'||EA2.ANIO||'-'||EA2.NUMERO ||'- -GDEBA-'||EA2.CODIGO_REPARTICION_USUARIO,
-EA1.POSICION,
-EA2.FECHA_ASOCIACION,
-EEA.ID_TRATA,
-EEA.ID_WORKFLOW,
-EEA.ESTADO,
-EEA.SISTEMA_CREADOR,
-EEA.SISTEMA_APODERADO,
-T.ASSIGNEE_
+group by
+ea2.id_codigo_caratula,
+ea2.tipo_documento||'-'||ea2.anio||'-'||ea2.numero ||'- -GDEBA-'||ea2.codigo_reparticion_usuario,
+ea1.posicion,
+ea2.fecha_asociacion,
+eea.id_trata,
+eea.id_workflow,
+eea.estado,
+eea.sistema_creador,
+eea.sistema_apoderado,
+t.assignee_
 
-ORDER BY EA1.POSICION
+order by ea1.posicion
 
 ;
