@@ -20,6 +20,7 @@ from
     left join track_ged.sade_reparticion sr on (ssi.codigo_reparticion = sr.id_reparticion) 
     left join track_ged.sade_reparticion sr1 on (sr.ministerio = sr1.id_reparticion)
     left join co_ged.datos_usuario du on (du.usuario = su.nombre_usuario)
+	left join co_ged.cargos c on (du.cargo = c.id) 
 	
 where sr1.codigo_reparticion = 'dpmamjgm'
 ;

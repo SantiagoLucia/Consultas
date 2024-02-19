@@ -1,22 +1,21 @@
-SELECT 
-    G.NUMERO NUMERO_GEDO,
-    G.NUMEROESPECIAL NUMERO_ESPECIAL,
-    G.REPARTICION CODIGO_REPARTICION,
-    SR.NOMBRE_REPARTICION NOMBRE_REPARTICION,
-    SR1.CODIGO_REPARTICION CODIGO_MINISTERIO,
-    SR1.NOMBRE_REPARTICION NOMBRE_MINISTERIO,
-    TO_CHAR(G.FECHACREACION, 'DD/MM/YYYY') FECHA_CREACION,
-    T.ACRONIMO TIPO_GEDO,
-    T.NOMBRE NOMBRE_GEDO
+select 
+    g.numero numero_gedo,
+    g.numeroespecial numero_especial,
+    g.reparticion codigo_reparticion,
+    sr.nombre_reparticion nombre_reparticion,
+    sr1.codigo_reparticion codigo_ministerio,
+    sr1.nombre_reparticion nombre_ministerio,
+    to_char(g.fechacreacion, 'dd/mm/yyyy') fecha_creacion,
+    t.acronimo tipo_gedo,
+    t.nombre nombre_gedo
     
-FROM GEDO_GED.GEDO_DOCUMENTO G
-INNER JOIN GEDO_GED.GEDO_TIPODOCUMENTO T ON T.ID = G.TIPO
-INNER JOIN GEDO_GED.GEDO_TIPODOCUMENTO_FAMILIA F ON T.FAMILIA = F.ID 
-INNER JOIN TRACK_GED.SADE_REPARTICION SR ON G.REPARTICION = SR.CODIGO_REPARTICION  
-INNER JOIN TRACK_GED.SADE_REPARTICION SR1 ON SR.MINISTERIO = SR1.ID_REPARTICION
+from gedo_ged.gedo_documento g
+inner join gedo_ged.gedo_tipodocumento t on t.id = g.tipo
+inner join track_ged.sade_reparticion sr on g.reparticion = sr.codigo_reparticion  
+inner join track_ged.sade_reparticion sr1 on sr.ministerio = sr1.id_reparticion
 
-WHERE
-    T.ACRONIMO IN ('DECRE','DECRI','DECTO','DI','DISFC','DISPC','DISPO','RESFC',
-    'RESFO','RESO','RESOL','RESOC') AND
-    G.FECHACREACION >= SYSDATE-20
-ORDER BY G.FECHACREACION DESC;
+where
+    t.acronimo in ('DECRE','DECRI','DECTO','DI','DISFC','DISPC','DISPO','RESFC',
+                    'RESFO','RESO','RESOL','RESOC') and
+    g.fechacreacion > trunc(sysdate)
+order by g.fechacreacion desc;
