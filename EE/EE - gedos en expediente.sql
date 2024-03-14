@@ -1,9 +1,15 @@
+select * from ee_ged.ee_expediente_electronico
+where numero = 00631710 and codigo_reparticion_usuario = 'DSTAMJYDHGP';
+-- id 2910140, es reservado
+
 select
     ee.id id_exp,
     ee.tipo_documento||'-'||ee.anio||'-'||ee.numero||'- -'||
 		ee.codigo_reparticion_actuacion||'-'||ee.codigo_reparticion_usuario as nro_expediente,
     gd.id id_gedo,
-    gd.numero gedos_asociados,
+    gd.numero gedo_asociado,
+    round(gd.peso/1024/1024,2) peso_mb,
+    gd.motivo,
     tr.reserva tipo_reserva
 from
     ee_ged.ee_expediente_electronico ee
@@ -12,4 +18,5 @@ from
     inner join gedo_ged.gedo_documento gd on d.numero_sade = gd.numero
     inner join gedo_ged.gedo_tipo_reserva tr on gd.tiporeserva = tr.id
 where
-    ee.id = 1569742;
+    ee.id = 2910140
+;
