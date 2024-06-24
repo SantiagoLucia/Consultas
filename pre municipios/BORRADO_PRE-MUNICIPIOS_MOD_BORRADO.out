@@ -1,0 +1,997 @@
+
+Table GEDO_GED.DOCUMENTO_DATOS_VARIABLES truncado.
+
+
+Table GEDO_GED.GEDO_ARCHIVO_DE_TRABAJO truncado.
+
+
+Table GEDO_GED.GEDO_ARCHIVO_EMBEBIDO truncado.
+
+
+Table GEDO_GED.GEDO_AUD_ERROR_EDR truncado.
+
+
+Table GEDO_GED.GEDO_AUTOGUARDADO_DOC_LIBRE truncado.
+
+
+Table GEDO_GED.GEDO_AUTOGUARDADO_DOC_REF truncado.
+
+
+Table GEDO_GED.GEDO_BIBLIOTECA_DOCS truncado.
+
+
+Table GEDO_GED.GEDO_DOCUMENTO_ADJUNTO truncado.
+
+
+Table GEDO_GED.GEDO_DOCUMENTO_SOLICITUD truncado.
+
+
+Table GEDO_GED.GEDO_ERROR_REINTENTO truncado.
+
+
+Table GEDO_GED.GEDO_FAVORITOS truncado.
+
+
+Table GEDO_GED.GEDO_FIRMANTES truncado.
+
+
+Table GEDO_GED.GEDO_HISTORIAL truncado.
+
+
+Table GEDO_GED.GEDO_HISTORIAL_PROCESOS truncado.
+
+
+Table GEDO_GED.GEDO_HIST_VISUALIZACION truncado.
+
+
+Table GEDO_GED.GEDO_NUMERACIONESPECIAL truncado.
+
+
+Table GEDO_GED.GEDO_NUMERACIONESPECIAL_AUD truncado.
+
+
+Table GEDO_GED.GEDO_NUMERACIONESPECIAL_BCK truncado.
+
+
+Table GEDO_GED.GEDO_TIPODOCUMENTO_FAMILIA_AUD truncado.
+
+
+Table GEDO_GED.GEDO_TIPODOC_PERFIL truncado.
+
+
+Table GEDO_GED.GEDO_USR_PROCESO_SELLO truncado.
+
+
+Table GEDO_GED.GEDO_USUARIO_SELLO_PUBLICABLE truncado.
+
+
+Table GEDO_GED.MESSAGEREQUEST truncado.
+
+
+Table GEDO_GED.PF_TAREAS_FINALIZADAS truncado.
+
+
+Table GEDO_GED.TEMPLATE_TIPO_DOC truncado.
+
+
+Error que empieza en la línea: 27 del comando :
+TRUNCATE TABLE  GEDO_GED.DF_TRANSACTION
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table GEDO_GED.GEDO_AUD_ERROR_CAMBIO_SIGLA truncado.
+
+
+Error que empieza en la línea: 29 del comando :
+TRUNCATE TABLE  GEDO_GED.GEDO_AUD_TAREA_CAMBIO_SIGLA
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table GEDO_GED.DATOS_VARIABLES_TIPO_DOC_AUD truncado.
+
+
+Table GEDO_GED.GEDO_TIPODOCUMENTO_REP_AUD truncado.
+
+
+Table GEDO_GED.GEDO_TIPODOCUMENTO_AUD truncado.
+
+
+Table GEDO_GED.CCOO_COMUNICACION_DESTINO truncado.
+
+
+Error que empieza en la línea: 34 del comando :
+TRUNCATE TABLE  GEDO_GED.CCOO_COMUNICACION
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table GEDO_GED.GEDO_DOCUMENTO_USUARIOSRESERVA truncado.
+
+
+Table GEDO_GED.GEDO_AVISO truncado.
+
+
+Error que empieza en la línea: 37 del comando :
+TRUNCATE TABLE  GEDO_GED.GEDO_DOCUMENTO
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table GEDO_GED.DATOS_VARIABLES_TIPO_DOCUMENTO truncado.
+
+
+Table GEDO_GED.GEDO_TIPODOCUMENTO_REPARTICION truncado.
+
+
+Table GEDO_GED.GEDO_NUMEROSUSADOS truncado.
+
+
+Table GEDO_GED.GEDO_TIPODOCUMENTO_EMBEBIDO truncado.
+
+
+Table GEDO_GED.GEDO_DOCUMENTO_TEMPLATE truncado.
+
+
+Error que empieza en la línea: 43 del comando :
+TRUNCATE TABLE  GEDO_GED.GEDO_TIPODOCUMENTO_TEMPLATE
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 44 del comando :
+TRUNCATE TABLE  GEDO_GED.GEDO_TIPODOCUMENTO
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 44 del comando :
+TRUNCATE TABLE  GEDO_GED.GEDO_TIPODOCUMENTO
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 45 del comando :
+TRUNCATE TABLE  GEDO_GED.GEDO_TIPODOCUMENTO_FAMILIA
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table GEDO_GED.GEDO_DISTRIBUCION_USUARIO truncado.
+
+
+Table GEDO_GED.GEDO_LIST_DISTRIB_TAREAS truncado.
+
+
+Table GEDO_GED.GEDO_USUARIO_PLANTILLA truncado.
+
+
+Table GEDO_GED.GEDO_PLANTILLA truncado.
+
+
+Table GEDO_GED.JBPM4_JOB truncado.
+
+
+Table GEDO_GED.JBPM4_VARIABLE truncado.
+
+
+Error que empieza en la línea: 53 del comando :
+TRUNCATE TABLE  GEDO_GED.JBPM4_DEPLOYMENT
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 54 del comando :
+TRUNCATE TABLE  GEDO_GED.JBPM4_EXECUTION
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 55 del comando :
+TRUNCATE TABLE  GEDO_GED.JBPM4_TASK
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EE_GED.CONTROL_TC truncado.
+
+
+Error que empieza en la línea: 58 del comando :
+TRUNCATE TABLE  EE_GED.DATOS_VARIABLES_COMBO_GRUPOS
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EE_GED.EE_ARCH_TRABAJO_VISUALIZACION truncado.
+
+
+Table EE_GED.EE_AUDITORIA_DE_CONSULTA truncado.
+
+
+Table EE_GED.EE_AUDITORIA_NOTIFICACION truncado.
+
+
+Table EE_GED.EE_DOCUMENTO_OBLIGATORIO truncado.
+
+
+Table EE_GED.EE_EXPEDIENTE_DOCUMENTOS_0811 truncado.
+
+
+Table EE_GED.EE_EXPEDIENTE_DOCUMENTOS_3010 truncado.
+
+
+Table EE_GED.EE_INFORMAR_RESUELTO truncado.
+
+
+Table EE_GED.EE_NOTIFICACION_RECIBIDA truncado.
+
+
+Table EE_GED.EE_TAREA_PARALELO truncado.
+
+
+Table EE_GED.GENERAR_COPIA truncado.
+
+
+Table EE_GED.TRATAS_DIFERENCIALES truncado.
+
+
+Table EE_GED.TRATA_AUDITORIA truncado.
+
+
+Table EE_GED.TRATA_REPARTICION_AUDITORIA truncado.
+
+
+Table EE_GED.TRATA_TIPO_DOCUMENTO_AUDITORIA truncado.
+
+
+Table EE_GED.USUARIOS_FRECUENTES truncado.
+
+
+Table EE_GED.ACTIVIDAD truncado.
+
+
+Error que empieza en la línea: 75 del comando :
+TRUNCATE TABLE  EE_GED.TIPO_ACTIVIDAD
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EE_GED.EE_EXPEDIENTE_DOCUMENTOS truncado.
+
+
+Table EE_GED.EE_EXPEDIENTE_DOCUMENTOS_2510 truncado.
+
+
+Table EE_GED.EE_EXPEDIENTE_DOCUMENTOS_2410 truncado.
+
+
+Error que empieza en la línea: 79 del comando :
+TRUNCATE TABLE  EE_GED.DOCUMENTO
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EE_GED.METADATOS_TRATA truncado.
+
+
+Table EE_GED.EE_EXPEDIENTE_ARCHIVOSTRABAJO truncado.
+
+
+Error que empieza en la línea: 82 del comando :
+TRUNCATE TABLE  EE_GED.EE_ARCHIVO_DE_TRABAJO
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 83 del comando :
+TRUNCATE TABLE  EE_GED.HISTORIALOPERACION
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 84 del comando :
+TRUNCATE TABLE  EE_GED.EXPEDIENTEASOCIADO
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EE_GED.EE_EXPEDIENTE_ASOCIADO truncado.
+
+
+Table EE_GED.EE_AUD_TAREA_MIGRACION_ERROR truncado.
+
+
+Error que empieza en la línea: 87 del comando :
+TRUNCATE TABLE  EE_GED.EE_AUD_TAREA_MIGRACION
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 88 del comando :
+TRUNCATE TABLE  EE_GED.EE_EXPEDIENTE_ELECTRONICO
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 89 del comando :
+TRUNCATE TABLE  EE_GED.SOLICITUD_EXPEDIENTE
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 90 del comando :
+TRUNCATE TABLE  EE_GED.SOLICITANTE
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 91 del comando :
+TRUNCATE TABLE  EE_GED.DOCUMENTO_DE_IDENTIDAD
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EE_GED.TRATA_REPARTICION truncado.
+
+
+Table EE_GED.TRATA_TIPO_DOCUMENTO truncado.
+
+
+Error que empieza en la línea: 94 del comando :
+TRUNCATE TABLE  EE_GED.TRATA
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EE_GED.EE_DATOS_SISTEMA_EXTERNO truncado.
+
+
+Table EE_GED.EE_CONFIG_SIST_EXTERNO truncado.
+
+
+Table EE_GED.TRATA_INTEGRACION_REPARTICION truncado.
+
+
+Error que empieza en la línea: 99 del comando :
+TRUNCATE TABLE  EE_GED.EE_SISTEMA_EXTERNO
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EE_GED.JBPM4_DEPLOYPROP truncado.
+
+
+Table EE_GED.JBPM4_VARIABLE truncado.
+
+
+Table EE_GED.JBPM4_PARTICIPATION truncado.
+
+
+Error que empieza en la línea: 103 del comando :
+TRUNCATE TABLE  EE_GED.JBPM4_TASK
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 104 del comando :
+TRUNCATE TABLE  EE_GED.JBPM4_EXECUTION
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 105 del comando :
+TRUNCATE TABLE  EE_GED.JBPM4_LOB
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 106 del comando :
+TRUNCATE TABLE  EE_GED.JBPM4_DEPLOYMENT
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 107 del comando :
+TRUNCATE TABLE  EE_GED.JBPM4_LOB
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 108 del comando :
+TRUNCATE TABLE  EE_GED.JBPM4_DEPLOYMENT
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EU_GED.EU_ALERTA_AVISO truncado.
+
+
+Table EU_GED.EU_ALERTA_AVISO_EE truncado.
+
+
+Table EU_GED.EU_ALERTA_AVISO_GEDO truncado.
+
+
+Error que empieza en la línea: 112 del comando :
+TRUNCATE TABLE  EE_GED.EU_BUZON_DE_OTRO
+Informe de error -
+ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+
+Error que empieza en la línea: 112 del comando :
+TRUNCATE TABLE  EE_GED.EU_BUZON_DE_OTRO
+Informe de error -
+ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+
+Table EU_GED.EU_BUZON_DE_OTRO truncado.
+
+
+Table EU_GED.EU_FERIADOS_AUDI truncado.
+
+
+Error que empieza en la línea: 114 del comando :
+TRUNCATE TABLE  EE_GED.EU_LOCALIDAD
+Informe de error -
+ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+
+Table EU_GED.EU_LOCALIDAD truncado.
+
+
+Table EU_GED.EU_NOVEDAD_APLICACION truncado.
+
+
+Table EU_GED.EU_NOVEDAD_HIST truncado.
+
+
+Table EU_GED.EU_USUARIO_BUZONGRUPAL truncado.
+
+
+Table EU_GED.EU_USUARIO_BUZONOTROS truncado.
+
+
+0 filas eliminado
+
+
+0 filas eliminado
+
+
+Table EU_GED.EU_USUARIO_MISSUPERVISADOS truncado.
+
+
+0 filas eliminado
+
+
+0 filas eliminado
+
+
+Table EU_GED.MENSAJES_LOGIN truncado.
+
+
+0 filas eliminado
+
+
+Table EU_GED.MIG_TAREA truncado.
+
+
+Table EU_GED.MIG_TAREA_HIST truncado.
+
+
+Table EU_GED.REVINFO truncado.
+
+
+Table EU_GED.SADE_APP_ALIVE_LOGGER truncado.
+
+
+Table EE_GED.USUARIOS_LOGUEADOS truncado.
+
+
+Error que empieza en la línea: 138 del comando :
+TRUNCATE TABLE  EU_GED.EU_NOVEDAD
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 139 del comando :
+TRUNCATE TABLE  EU_GED.EU_CATEGORIA
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EU_GED.MIG_LOGUEO_ERROR truncado.
+
+
+Error que empieza en la línea: 141 del comando :
+TRUNCATE TABLE  EU_GED.MIG_TIPO_ERROR
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table EU_GED.EU_ALERTAS_AVISOS truncado.
+
+
+0 filas eliminado
+
+
+Table CO_GED.DATOS_USUARIO_SYNCH truncado.
+
+
+Table CO_GED.ST_AVISO truncado.
+
+
+Table CO_GED.PERIODO_LICENCIA truncado.
+
+
+0 filas eliminado
+
+
+Error que empieza en la línea: 152 del comando :
+DELETE FROM  CO_GED.REVINFO WHERE (rev NOT IN (228,236,281,282,279,280,668,2135,2136,6000,5997,11665,10543,16574,20678,17069,17065,110690,171802,169375,173624,178988,178978,178985,178974,186494,186492,189092,189094,189095,189096,189098,190143,191633,203516,204226,202798,208434,221573,221575,246993,276240,296108,315910,354886,354892,355110,376464,478026,569776,572071,1412885,1412883,1412881))
+Informe de error -
+ORA-02292: restricción de integridad (CO_GED.FKFB16C2B2CFE7DF8B) violada - registro secundario encontrado
+
+
+0 filas eliminado
+
+Confirmación terminada.
+
+0 filas eliminado
+
+
+0 filas eliminado
+
+
+Table TRACK_GED.CRUCE truncado.
+
+
+Table TRACK_GED.GDE_ALTA_USUARIOS_WORK truncado.
+
+
+0 filas eliminado
+
+Confirmación terminada.
+
+Error que empieza en la línea: 164 del comando :
+TRUNCATE TABLE  TRACK_GED.SADE_EXTRACTO
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table TRACK_GED.SADE_JURISDICCION truncado.
+
+
+Table TRACK_GED.SADE_MIG_BITACORA_TRACK truncado.
+
+
+Table TRACK_GED.SADE_PARAM_AUDIT truncado.
+
+
+Error que empieza en la línea: 168 del comando :
+TRUNCATE TABLE  TRACK_GED.SADE_PERMANENCIA
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table TRACK_GED.SADE_REMITO_SECUENCIA truncado.
+
+
+0 filas eliminado
+
+Confirmación terminada.
+
+Table TRACK_GED.SADE_WORK_ANOMALIAS truncado.
+
+
+Table TRACK_GED.SADE_WORK_ANOMALIAS_PASE truncado.
+
+
+Table TRACK_GED.SADE_WORK_EX_DUP_ANT_2011 truncado.
+
+
+Table TRACK_GED.SADE_WORK_EX_DUP_RES_ANT_2011 truncado.
+
+
+0 filas eliminado
+
+Confirmación terminada.
+
+Table TRACK_GED.SADE_ADMIN_REPARTICION_HIST truncado.
+
+
+0 filas eliminado
+
+Confirmación terminada.
+
+Table TRACK_GED.SADE_AGRUPACION_SECTOR_MESA truncado.
+
+
+0 filas eliminado
+
+Confirmación terminada.
+
+0 filas eliminado
+
+Confirmación terminada.
+
+0 filas eliminado
+
+Confirmación terminada.
+
+Table TRACK_GED.SADE_REPARTICION_SELECCIONADA truncado.
+
+
+Error que empieza en la línea: 190 del comando :
+DELETE FROM  TRACK_GED.SADE_SECTOR_INTERNO WHERE (codigo_sector_interno != 'TESTGDEBA')
+Informe de error -
+ORA-02292: restricción de integridad (TRACK_GED.FK_SADE_ACTUACION_AUDI_2) violada - registro secundario encontrado
+
+
+0 filas eliminado
+
+Confirmación terminada.
+
+Table TRACK_GED.SADE_ADMIN_REPARTICION truncado.
+
+
+Error que empieza en la línea: 195 del comando :
+TRUNCATE TABLE  TRACK_GED.SADE_CALLE
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Table TRACK_GED.SADE_REPARTICION_UAI truncado.
+
+
+Error que empieza en la línea: 197 del comando :
+TRUNCATE TABLE  TRACK_GED.SADE_UAI
+Informe de error -
+ORA-02266: claves únicas/primarias en la tabla referidas por claves ajenas activadas
+02266. 00000 -  "unique/primary keys in table referenced by enabled foreign keys"
+*Cause:    An attempt was made to truncate a table with unique or
+           primary keys referenced by foreign keys enabled in another table.
+           Other operations not allowed are dropping/truncating a partition of a
+           partitioned table or an ALTER TABLE EXCHANGE PARTITION.
+*Action:   Before performing the above operations the table, disable the
+           foreign key constraints in other tables. You can see what
+           constraints are referencing a table by issuing the following
+           command:
+           SELECT * FROM USER_CONSTRAINTS WHERE TABLE_NAME = "tabnam";
+
+Error que empieza en la línea: 198 del comando :
+DELETE FROM  TRACK_GED.SADE_REPARTICION WHERE (codigo_reparticion = 'TESTGDEBA')
+Informe de error -
+ORA-02292: restricción de integridad (TRACK_GED.FK_SADE_SECTOR_INTERNO_1) violada - registro secundario encontrado
+
+Confirmación terminada.
