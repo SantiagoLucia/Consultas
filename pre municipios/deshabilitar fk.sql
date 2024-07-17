@@ -1,9 +1,16 @@
-select 
-'alter table '||a.owner||'.'||a.table_name||' disable constraint '||a.constraint_name||';',
-'alter table '||a.owner||'.'||a.table_name||' enable constraint '||a.constraint_name||';'
+select
+    ac.owner||'.'||ac.table_name as tabla,
+    ac.constraint_name as nombre_constraint,
+    'alter table '||ac.owner||'.'||ac.table_name||' disable constraint '||ac.constraint_name||';' as deshabilitar_constraint,
+    'alter table '||ac.owner||'.'||ac.table_name||' enable constraint '||ac.constraint_name||';' as habilitar_constraint    
 
-from all_constraints a, all_constraints b
-where a.constraint_type = 'R' and a.status='ENABLED'
-and a.r_constraint_name = b.constraint_name
-and b.owner = 'GEDO_GED'
-and b.table_name = 'JBPM4_EXECUTION';
+from all_constraints ac 
+where 
+    ac.constraint_type = 'R' and 
+    ac.status = 'ENABLED' and
+    exists (select 0
+            from all_constraints
+            where 
+            ac.r_constraint_name = constraint_name 
+            and owner = 'GEDO_GED'
+            and table_name = 'GEDO_DOCUMENTO');

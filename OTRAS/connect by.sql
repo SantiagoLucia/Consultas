@@ -1,3 +1,14 @@
+select
+codigo_reparticion,
+nombre_reparticion,
+connect_by_root codigo_reparticion as codigo_organismo,
+connect_by_root nombre_reparticion as nombre_organismo
+from track_ged.sade_reparticion
+where estado_registro = 1
+connect by nocycle prior id_reparticion = ministerio
+;
+
+
 SELECT
     SR.CODIGO_REPARTICION,
     SR.NOMBRE_REPARTICION,
