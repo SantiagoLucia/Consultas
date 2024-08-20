@@ -1,79 +1,79 @@
-select * from (
-select  
-    ee.tipo_documento||'-'||ee.anio||'-'||ee.numero||'- -'||
-		ee.codigo_reparticion_actuacion||'-'||ee.codigo_reparticion_usuario as nro_expediente, 
-    ee.usuario_creador as usuario_caratulador,
-    ee.codigo_reparticion_usuario as cod_reparticion_caratulacion, 
-    rep_caratula.nombre_reparticion as reparticion_caratulacion, 
-    min_caratula.codigo_reparticion as cod_organismo_caratulacion, 
-    min_caratula.nombre_reparticion as organismo_caratulacion, 
-	ee.fecha_creacion as fecha_caratulacion,
-    tratas.codigo_trata,
-	tratas.descripcion as trata,  
-    ee.descripcion as descripcion, 
-    solex.motivo, 
-    ee.estado as estado_expediente,
-    nvl(regexp_substr(t.assignee_, '[^.]+'),'simple') as tipo_tramitacion,
-    regexp_substr(t.assignee_, '[^.]+') as usuario_asignado,
-	du.apellido_nombre as nombre_apellido,
-    coalesce(regexp_substr(regexp_substr(
-		p.groupid_, '[^-]+', 1, 2),'[^.]+'),ssi.codigo_sector_interno) as sector_actual,
-    repfin.codigo_reparticion as cod_reparticion_actual,
-    repfin.nombre_reparticion as reparticion_actual,
-    minfin.codigo_reparticion as cod_organismo_actual,  
-    minfin.nombre_reparticion as organismo_actual,
-    ee.usuario_modificacion,
-	ee.fecha_modificacion as fecha_ultima_modificacion, 
-	round(sysdate - ee.fecha_creacion) as dias_abierto,
-	dfvalue.input_name,
-	dfvalue.value_str
-
-from 
-    ee_ged.ee_expediente_electronico ee
-    left join ee_ged.solicitud_expediente solex on solex.id = ee.solicitud_iniciadora
-    left join ee_ged.trata tratas on tratas.id = ee.id_trata
-    left join ee_ged.jbpm4_task t on t.execution_id_ = ee.id_workflow
-    left join ee_ged.jbpm4_participation p on p.task_ = t.dbid_
+SELECT * FROM (
+    SELECT  
+        ee.tipo_documento || '-' || ee.anio || '-' || ee.numero || '- -' ||
+        ee.codigo_reparticion_actuacion || '-' || ee.codigo_reparticion_usuario AS nro_expediente, 
+        ee.usuario_creador AS usuario_caratulador,
+        ee.codigo_reparticion_usuario AS cod_reparticion_caratulacion, 
+        rep_caratula.nombre_reparticion AS reparticion_caratulacion, 
+        min_caratula.codigo_reparticion AS cod_organismo_caratulacion, 
+        min_caratula.nombre_reparticion AS organismo_caratulacion, 
+        ee.fecha_creacion AS fecha_caratulacion,
+        tratas.codigo_trata,
+        tratas.descripcion AS trata,  
+        ee.descripcion AS descripcion, 
+        solex.motivo, 
+        ee.estado AS estado_expediente,
+        NVL(REGEXP_SUBSTR(t.assignee_, '[^.]+'), 'simple') AS tipo_tramitacion,
+        REGEXP_SUBSTR(t.assignee_, '[^.]+') AS usuario_asignado,
+        du.apellido_nombre AS nombre_apellido,
+        COALESCE(
+            REGEXP_SUBSTR(REGEXP_SUBSTR(p.groupid_, '[^-]+', 1, 2), '[^.]+'), 
+            ssi.codigo_sector_interno
+        ) AS sector_actual,
+        repfin.codigo_reparticion AS cod_reparticion_actual,
+        repfin.nombre_reparticion AS reparticion_actual,
+        minfin.codigo_reparticion AS cod_organismo_actual,  
+        minfin.nombre_reparticion AS organismo_actual,
+        ee.usuario_modificacion,
+        ee.fecha_modificacion AS fecha_ultima_modificacion, 
+        ROUND(SYSDATE - ee.fecha_creacion) AS dias_abierto,
+        dfvalue.input_name,
+        dfvalue.value_str
+    FROM 
+        ee_ged.ee_expediente_electronico ee
+    LEFT JOIN ee_ged.solicitud_expediente solex ON solex.id = ee.solicitud_iniciadora
+    LEFT JOIN ee_ged.trata tratas ON tratas.id = ee.id_trata
+    LEFT JOIN ee_ged.jbpm4_task t ON t.execution_id_ = ee.id_workflow
+    LEFT JOIN ee_ged.jbpm4_participation p ON p.task_ = t.dbid_
     
-    --caratulacion--
-    left join track_ged.sade_reparticion rep_caratula on ee.codigo_reparticion_usuario = rep_caratula.codigo_reparticion
-    left join track_ged.sade_reparticion min_caratula on rep_caratula.ministerio = min_caratula.id_reparticion
+    -- Caratulación
+    LEFT JOIN track_ged.sade_reparticion rep_caratula ON ee.codigo_reparticion_usuario = rep_caratula.codigo_reparticion
+    LEFT JOIN track_ged.sade_reparticion min_caratula ON rep_caratula.ministerio = min_caratula.id_reparticion
         
-    --esta asignado a usuario--
-    left join track_ged.sade_sector_usuario su on regexp_substr(t.assignee_, '[^.]+') = su.nombre_usuario
-        and su.id_sector_usuario = (
-            select max(z.id_sector_usuario) from track_ged.sade_sector_usuario z 
-            where z.nombre_usuario = regexp_substr(t.assignee_, '[^.]+')
+    -- Esta asignado a usuario
+    LEFT JOIN track_ged.sade_sector_usuario su ON REGEXP_SUBSTR(t.assignee_, '[^.]+') = su.nombre_usuario
+        AND su.id_sector_usuario = (
+            SELECT MAX(z.id_sector_usuario) 
+            FROM track_ged.sade_sector_usuario z 
+            WHERE z.nombre_usuario = REGEXP_SUBSTR(t.assignee_, '[^.]+')
         )
-	left join co_ged.datos_usuario du on du.usuario = su.nombre_usuario
-	left join track_ged.sade_sector_interno ssi on su.id_sector_interno = ssi.id_sector_interno
-    left join track_ged.sade_reparticion sr on ssi.codigo_reparticion = sr.id_reparticion
-    left join track_ged.sade_reparticion sr1 on sr1.id_reparticion = sr.ministerio
+    LEFT JOIN co_ged.datos_usuario du ON du.usuario = su.nombre_usuario
+    LEFT JOIN track_ged.sade_sector_interno ssi ON su.id_sector_interno = ssi.id_sector_interno
+    LEFT JOIN track_ged.sade_reparticion sr ON ssi.codigo_reparticion = sr.id_reparticion
+    LEFT JOIN track_ged.sade_reparticion sr1 ON sr1.id_reparticion = sr.ministerio
 
-    --sin asignar a usuario--
-    left join track_ged.sade_reparticion repa on regexp_substr(p.groupid_, '[^-]+') = repa.codigo_reparticion
-    left join track_ged.sade_reparticion ministerio on ministerio.id_reparticion = repa.ministerio
+    -- Sin asignar a usuario
+    LEFT JOIN track_ged.sade_reparticion repa ON REGEXP_SUBSTR(p.groupid_, '[^-]+') = repa.codigo_reparticion
+    LEFT JOIN track_ged.sade_reparticion ministerio ON ministerio.id_reparticion = repa.ministerio
 
-    --reparticion/ministerio actual
-    left join track_ged.sade_reparticion repfin on repfin.codigo_reparticion = coalesce(sr.codigo_reparticion, repa.codigo_reparticion)
-    left join track_ged.sade_reparticion minfin on minfin.codigo_reparticion = coalesce(sr1.codigo_reparticion, ministerio.codigo_reparticion)
+    -- Repartición/Ministerio Actual
+    LEFT JOIN track_ged.sade_reparticion repfin ON repfin.codigo_reparticion = COALESCE(sr.codigo_reparticion, repa.codigo_reparticion)
+    LEFT JOIN track_ged.sade_reparticion minfin ON minfin.codigo_reparticion = COALESCE(sr1.codigo_reparticion, ministerio.codigo_reparticion)
 
-   --documentos
-   left join ee_ged.ee_expediente_documentos eedocs on eedocs.id = ee.id and eedocs.posicion = 1
-   left join ee_ged.documento eedoc on eedocs.id_documento = eedoc.id
-   left join gedo_ged.df_form_comp_value dfvalue on dfvalue.id_transaction = eedoc.id_transaccion_fc
+    -- Documentos
+    LEFT JOIN ee_ged.ee_expediente_documentos eedocs ON eedocs.id = ee.id AND eedocs.posicion = 1
+    LEFT JOIN ee_ged.documento eedoc ON eedocs.id_documento = eedoc.id
+    LEFT JOIN gedo_ged.df_form_comp_value dfvalue ON dfvalue.id_transaction = eedoc.id_transaccion_fc
    
-where
-    tratas.codigo_trata = 'LEG0020' and 
-	ee.codigo_reparticion_usuario != 'TESTGDEBA'
-	and ee.fecha_creacion > trunc(sysdate, 'YEAR')
+    WHERE
+        tratas.codigo_trata = 'LEG0020' 
+        AND ee.codigo_reparticion_usuario != 'TESTGDEBA'
+        AND ee.fecha_creacion > TRUNC(SYSDATE, 'YEAR')
 )
-   
-pivot(max(value_str) 
-for input_name in (
-   'idorganismo' as idorganismo,
-   'organismoorigen'as organismoorigen,
-   'idcausanumero' as idcausanumero,
-   'idnotificacion' as idnotificacion
-   )
-);   
+PIVOT(MAX(value_str) 
+      FOR input_name IN (
+          'idorganismo' AS idorganismo,
+          'organismoorigen' AS organismoorigen,
+          'idcausanumero' AS idcausanumero,
+          'idnotificacion' AS idnotificacion)
+);

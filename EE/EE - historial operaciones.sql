@@ -1,5 +1,5 @@
 select
-ee.tipo_documento || '-' || ee.anio || '-' || ee.numero || '-' || ee.codigo_reparticion_actuacion || '-' || ee.codigo_reparticion_usuario as nro_expediente,
+ee.tipo_documento||'-'||ee.anio||'-'||ee.numero||'- -'||ee.codigo_reparticion_actuacion||'-'||ee.codigo_reparticion_usuario as nro_expediente,
 to_char(ee.fecha_creacion, 'dd/mm/yyyy') as fecha_caratulacion,
 to_char(ee.fecha_creacion, 'hh24:mi:ss') as hora_caratulacion,
 ee.codigo_reparticion_usuario as cod_reparticion_caratulacion, 
@@ -13,17 +13,24 @@ to_char(hist.fecha_operacion, 'dd/mm/yyyy') as fecha_operacion,
 to_char(hist.fecha_operacion, 'hh24:mi:ss') as hora_operacion,
 to_char(hist.fecha_operacion, 'month') as mes_operacion,
 
-coalesce(
-(select regexp_replace((
-trunc((h2.fecha_operacion - hist.fecha_operacion)) || ' dias ' ||
-trunc(mod((h2.fecha_operacion - hist.fecha_operacion) * 24, 24)) || ' hs ' ||
-trunc(mod((h2.fecha_operacion - hist.fecha_operacion) * 24 * 60, 60)) || ' min'
-), '[^A-Z0-9- ]', '')
-from ee_ged.historialoperacion h2
-where h2.id_expediente = hist.id_expediente and h2.ord_hist = hist.ord_hist -1) 
-,
-'0 dias 0 hs 0 min'
-) tiempo_entre_operaciones,
+COALESCE(
+        (SELECT 
+            REGEXP_REPLACE(
+                TRIM(
+                    TRUNC((h2.fecha_operacion - hist.fecha_operacion)) || ' dias ' ||
+                    TRUNC(MOD((h2.fecha_operacion - hist.fecha_operacion) * 24, 24)) || ' hs ' ||
+                    TRUNC(MOD((h2.fecha_operacion - hist.fecha_operacion) * 24 * 60, 60)) || ' min'
+                ),
+                '[^A-Z0-9- ]', ''
+            )
+         FROM 
+            ee_ged.historialoperacion h2
+         WHERE 
+            h2.id_expediente = hist.id_expediente 
+            AND h2.ord_hist = hist.ord_hist - 1
+        ),
+        '0 dias 0 hs 0 min'
+    ) AS tiempo_entre_operaciones,
 
 hist.motivo,
 
@@ -60,9 +67,6 @@ left join track_ged.sade_reparticion rep_caratula on ee.codigo_reparticion_usuar
 left join track_ged.sade_reparticion min_caratula on rep_caratula.ministerio = min_caratula.id_reparticion
 
 where 
-extract(year from hist.fecha_operacion) = 2020 and
-hist.tipo_operacion = 'Pase' and
-hist.codigo_jurisdiccion_origen != 'FDE' and
-hist.codigo_jurisdiccion_destino = 'FDE'
+ee.id = 7971847
 
 order by hist.expediente, hist.ord_hist asc;

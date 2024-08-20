@@ -1,8 +1,10 @@
 ﻿select
-case when h.expediente is not null then
-   'ex'||'-'||regexp_substr(h.expediente,'[0-9]{4}',3)||'-'||
-   regexp_substr(h.expediente,'[0-9]{1,8}',7) ||'- -'||
-   'GDEBA' || regexp_substr(h.expediente,'-.+') end as nro_expediente,
+	CASE WHEN expediente IS NOT NULL THEN
+	REGEXP_REPLACE(
+		expediente, 
+		'(EX)([0-9]{4})([0-9]{1,8})(GDEBA)(-.+)', 
+        '\1-\2-\3- -\4\5'
+    ) END AS nro_expediente,
 h.tipo_operacion,
 h.fecha_operacion,
 h.motivo,
@@ -19,7 +21,7 @@ from
 ee_ged.historialoperacion h
 
 where 
-h.fecha_operacion >= trunc(sysdate, 'MONTH')
+h.fecha_operacion > trunc(sysdate, 'MONTH')
 and h.tipo_operacion = 'Pase'
 and h.codigo_jurisdiccion_destino = 'CGP'
 
