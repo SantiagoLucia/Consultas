@@ -22,11 +22,11 @@ LEFT JOIN (
         h.*,
         ROW_NUMBER() OVER (PARTITION BY h.id_expediente ORDER BY h.fecha_operacion DESC) AS rn
     FROM 
-        ee_ged.historialoperacion h 
-     
+        ee_ged.historialoperacion h
+    WHERE 
+        h.fecha_operacion > TRUNC(ADD_MONTHS(sysdate,-6))
 ) h ON e.id = h.id_expediente AND h.rn = 1
 WHERE 
-	e.id = 7971847
-
+    h.codigo_reparticion_destino != 'TESTGDEBA'
 ORDER BY 
     h.fecha_operacion DESC;
