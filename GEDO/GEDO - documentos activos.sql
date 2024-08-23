@@ -26,7 +26,7 @@ FROM (
         td.nombre,
         td.version,
         td.tipoproduccion,
-        MAX (td.version) OVER (PARTITION BY td.acronimo) AS ultima_version,
+        ROW_NUMBER() OVER (PARTITION BY td.ACRONIMO ORDER BY td.FECHA_CREACION desc) AS rn,
         td.esespecial,
         td.tienetoken,
         f.nombre familia,
@@ -36,11 +36,11 @@ FROM (
         gedo_ged.gedo_tipodocumento td
         inner join gedo_ged.gedo_tipodocumento_familia f on td.familia = f.id 
     WHERE
-        estado = 'ALTA'
+        td.estado = 'ALTA'
     )
 
 WHERE
-    version = ultima_version 
+    rn = 1
     
 ORDER BY
-    tamaño desc;
+    tamaño_mb desc;
