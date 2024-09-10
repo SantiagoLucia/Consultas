@@ -8,7 +8,6 @@ select
 		ee.codigo_reparticion_actuacion||'-'||ee.codigo_reparticion_usuario as nro_expediente,
     gd.id id_gedo,
     gd.numero gedo_asociado,
-    round(gd.peso/1024/1024,2) peso_mb,
     gd.motivo,
     tr.reserva tipo_reserva
 from
