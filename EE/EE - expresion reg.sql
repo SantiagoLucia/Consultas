@@ -10,7 +10,7 @@ FROM
 WHERE 
 	FECHA_OPERACION > TRUNC(SYSDATE);
 	
-	
+/*	
 Explicación:
 
     (EX): Captura el prefijo EX.
@@ -24,3 +24,4 @@ REGEXP_REPLACE:
     Cadena de entrada: 'EX202425853766GDEBA-DPAJYCDGCYE'
     Expresión regular: La expresión (EX)([0-9]{4})([0-9]{1,8})(GDEBA)(-.+) captura las diferentes partes de la cadena.
     Cadena de reemplazo: La cadena \1-\2-\3- -\4\5 utiliza las partes capturadas y las organiza con los guiones y espacios necesarios.	
+*/
