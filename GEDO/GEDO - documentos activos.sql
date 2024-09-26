@@ -12,13 +12,14 @@ SELECT
     END AS "TIPO PRODUCCION",    
     
     CASE WHEN esespecial = 0 THEN 'NO'
-            ELSE 'SI'
+         ELSE 'SI'
     END AS "ES ESPECIAL",
     
     CASE WHEN tienetoken = 0 THEN 'NO'
-            ELSE 'SI'
+         ELSE 'SI'
     END AS "TIENE TOKEN",
-    round(tamano/1024/1024,2) tamaño_mb
+    
+    ROUND(tamano / 1024 / 1024, 2) AS "TAMAÃ‘O_MB"
 
 FROM ( 
     SELECT
@@ -26,21 +27,18 @@ FROM (
         td.nombre,
         td.version,
         td.tipoproduccion,
-        ROW_NUMBER() OVER (PARTITION BY td.ACRONIMO ORDER BY td.FECHA_CREACION desc) AS rn,
+        ROW_NUMBER() OVER (PARTITION BY td.acronimo ORDER BY td.fecha_creacion DESC) AS rn,
         td.esespecial,
         td.tienetoken,
-        f.nombre familia,
+        f.nombre AS familia,
         td.tamano
         
     FROM
         gedo_ged.gedo_tipodocumento td
-        inner join gedo_ged.gedo_tipodocumento_familia f on td.familia = f.id 
+        INNER JOIN gedo_ged.gedo_tipodocumento_familia f ON td.familia = f.id 
     WHERE
         td.estado = 'ALTA'
-    )
+) AS subquery
 
 WHERE
-    rn = 1
-    
-ORDER BY
-    tamaño_mb desc;
+    rn = 1;
