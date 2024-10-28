@@ -1,26 +1,26 @@
-select
-    su.nombre_usuario,
-    du.apellido_nombre apellido_nombre,
-    decode(su.estado_registro, 0, 'baja', 1, 'alta') estado,
-    du.numero_cuit cuit,
-    du.mail,
-    c.cargo,
-    to_char(su.fecha_creacion,'dd/mm/yyyy') fecha_creacion,
-    decode(du.aceptacion_tyc, 0, 'no', 1, 'si') primer_ingreso,
-    ssi.codigo_sector_interno codigo_sector_interno,
-    ssi.nombre_sector_interno nombre_sector_interno,
-    sr.codigo_reparticion codigo_reparticion,
-    sr.nombre_reparticion  nombre_reparticion,
-    sr1.codigo_reparticion codigo_ministerio,
-    sr1.nombre_reparticion  nombre_ministerio
+SELECT
+    SU.NOMBRE_USUARIO,
+    DU.APELLIDO_NOMBRE APELLIDO_NOMBRE,
+    DECODE(SU.ESTADO_REGISTRO, 0, 'BAJA', 1, 'ALTA') ESTADO,
+    DU.NUMERO_CUIT CUIT,
+    DU.MAIL,
+    C.CARGO,
+    TO_CHAR(SU.FECHA_CREACION,'DD/MM/YYYY') FECHA_CREACION,
+    DECODE(DU.ACEPTACION_TYC, 0, 'NO', 1, 'SI') PRIMER_INGRESO,
+    SSI.CODIGO_SECTOR_INTERNO CODIGO_SECTOR_INTERNO,
+    SSI.NOMBRE_SECTOR_INTERNO NOMBRE_SECTOR_INTERNO,
+    SR.CODIGO_REPARTICION CODIGO_REPARTICION,
+    SR.NOMBRE_REPARTICION  NOMBRE_REPARTICION,
+    SR1.CODIGO_REPARTICION CODIGO_MINISTERIO,
+    SR1.NOMBRE_REPARTICION  NOMBRE_MINISTERIO
 
-from 
-    track_ged.sade_sector_usuario su 
-    left join track_ged.sade_sector_interno ssi on (su.id_sector_interno = ssi.id_sector_interno) 
-    left join track_ged.sade_reparticion sr on (ssi.codigo_reparticion = sr.id_reparticion) 
-    left join track_ged.sade_reparticion sr1 on (sr.ministerio = sr1.id_reparticion)
-    left join co_ged.datos_usuario du on (du.usuario = su.nombre_usuario)
-	left join co_ged.cargos c on (du.cargo = c.id) 
+FROM 
+    TRACK_GED.SADE_SECTOR_USUARIO SU 
+    LEFT JOIN TRACK_GED.SADE_SECTOR_INTERNO SSI ON (SU.ID_SECTOR_INTERNO = SSI.ID_SECTOR_INTERNO) 
+    LEFT JOIN TRACK_GED.SADE_REPARTICION SR ON (SSI.CODIGO_REPARTICION = SR.ID_REPARTICION) 
+    LEFT JOIN TRACK_GED.SADE_REPARTICION SR1 ON (SR.MINISTERIO = SR1.ID_REPARTICION)
+    LEFT JOIN CO_GED.DATOS_USUARIO DU ON (DU.USUARIO = SU.NOMBRE_USUARIO)
+	LEFT JOIN CO_GED.CARGOS C ON (DU.CARGO = C.ID) 
 	
-where sr1.codigo_reparticion = 'dpmamjgm'
+WHERE SR1.CODIGO_REPARTICION = 'DPMAMJGM'
 ;
