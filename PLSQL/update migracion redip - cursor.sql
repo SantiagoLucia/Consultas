@@ -1,89 +1,88 @@
-set serveroutput on 
-set define off
+SET SERVEROUTPUT ON 
+SET DEFINE OFF
 
-declare
+DECLARE
 
 -- CURSOR PARA OBTENER REPARTICIONES --
-cursor c_reparticiones is
-	select 
-	sr.codigo_reparticion as codigo_viejo,
-	mt.destino_reparticion as codigo_nuevo
-	from (
-		select distinct 
-		regexp_substr(groupid_,'[^.]+') as codigo_repa
-		from rce_ged.jbpm4_participation
-	) aux
+CURSOR C_REPARTICIONES IS
+	SELECT 
+		SR.CODIGO_REPARTICION AS CODIGO_VIEJO,
+		MT.DESTINO_REPARTICION AS CODIGO_NUEVO
+	FROM (
+		SELECT DISTINCT 
+		REGEXP_SUBSTR(GROUPID_,'[^.]+') AS CODIGO_REPA
+		FROM RCE_GED.JBPM4_PARTICIPATION
+	) AUX
 	
-	inner join track_ged.sade_reparticion sr 
-		on sr.codigo_reparticion = aux.codigo_repa
-	inner join eu_ged.mig_tarea mt
-		on mt.origen_reparticion = sr.codigo_reparticion 
-	where 
-	sr.estado_registro = 0
-	and sr.vigencia_hasta > to_date('01/01/2024','dd/mm/yyyy')
-	and mt.tipo_migracion = 'MIGRACION_REPARTICION'
-	and mt.estado = 'FINALIZADA'
-	and mt.modulo = 'EU';
+	INNER JOIN TRACK_GED.SADE_REPARTICION SR 
+		ON SR.CODIGO_REPARTICION = AUX.CODIGO_REPA
+	INNER JOIN EU_GED.MIG_TAREA MT
+		ON MT.ORIGEN_REPARTICION = SR.CODIGO_REPARTICION 
+
+	WHERE 
+		SR.ESTADO_REGISTRO = 0
+		AND SR.VIGENCIA_HASTA > TO_DATE('01/01/2024','DD/MM/YYYY')
+		AND MT.TIPO_MIGRACION = 'MIGRACION_REPARTICION'
+		AND MT.ESTADO = 'FINALIZADA'
+		AND MT.MODULO = 'EU';
 
 -- PROCEDIMIENTO PARA ACTUALIZAR BUZONES --
-procedure actualizar_buzon(
-	p_cod_reparticion_origen in varchar2,
-	p_cod_reparticion_destino in varchar2) 
-is l_registros_modificados number := 0;
-begin
-	dbms_output.put_line('ACTUALIZANDO: '||p_cod_reparticion_origen||' -> '
-         ||p_cod_reparticion_destino);
+PROCEDURE ACTUALIZAR_BUZON(
+	P_COD_REPARTICION_ORIGEN IN VARCHAR2,
+	P_COD_REPARTICION_DESTINO IN VARCHAR2) 
+IS 
+	L_REGISTROS_MODIFICADOS NUMBER := 0;
+
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('ACTUALIZANDO: '||P_COD_REPARTICION_ORIGEN||' -> '||P_COD_REPARTICION_DESTINO);
 	
-	-- inicio bloque update: jbpm4_participation
-	update rce_ged.jbpm4_participation
-	set groupid_ = replace(groupid_, p_cod_reparticion_origen,
-									 p_cod_reparticion_destino)
-	where groupid_ like p_cod_reparticion_origen||'.%';
-	l_registros_modificados := l_registros_modificados + sql%rowcount;
-	-- fin bloque update
+	-- INICIO BLOQUE UPDATE: JBPM4_PARTICIPATION
+	UPDATE RCE_GED.JBPM4_PARTICIPATION
+	SET GROUPID_ = REPLACE(GROUPID_, P_COD_REPARTICION_ORIGEN, P_COD_REPARTICION_DESTINO)
+	WHERE GROUPID_ LIKE P_COD_REPARTICION_ORIGEN||'.%';
+	-- FIN BLOQUE UPDATE
+	
+	L_REGISTROS_MODIFICADOS := L_REGISTROS_MODIFICADOS + SQL%ROWCOUNT;
 
-	-- inicio bloque update: jbpm4_variable
-	update rce_ged.jbpm4_variable
-	set string_value_ = replace(string_value_, p_cod_reparticion_origen,
-									 p_cod_reparticion_destino)
-	where key_ = 'grupoAsignado' and
-	string_value_ like p_cod_reparticion_origen||'.%';
-	l_registros_modificados := l_registros_modificados + sql%rowcount;
-	-- fin bloque update
+	-- INICIO BLOQUE UPDATE: JBPM4_VARIABLE
+	UPDATE RCE_GED.JBPM4_VARIABLE
+	SET STRING_VALUE_ = REPLACE(STRING_VALUE_, P_COD_REPARTICION_ORIGEN, P_COD_REPARTICION_DESTINO)
+	WHERE KEY_ = 'grupoAsignado' AND STRING_VALUE_ LIKE P_COD_REPARTICION_ORIGEN||'.%';
+	-- FIN BLOQUE UPDATE
+	
+	L_REGISTROS_MODIFICADOS := L_REGISTROS_MODIFICADOS + SQL%ROWCOUNT;
 
-	commit; 
-	dbms_output.put_line('Se modificaron '||l_registros_modificados||' registros');
-	dbms_output.put_line('COMMIT REALIZADO');
-	dbms_output.new_line;
+	COMMIT; 
+	DBMS_OUTPUT.PUT_LINE('SE MODIFICARON '||L_REGISTROS_MODIFICADOS||' REGISTROS');
+	DBMS_OUTPUT.PUT_LINE('COMMIT REALIZADO');
+	DBMS_OUTPUT.NEW_LINE;
 
-exception		
-	when others then
-	begin
-		rollback;
-		dbms_output.put_line('SE REALIZA ROLLBACK DE TRANSACCION: ');
-		dbms_output.put_line('    ' || substr(sqlerrm,1, 200));
-		dbms_output.new_line;
-	end;   
-end actualizar_buzon;
+EXCEPTION		
+	WHEN OTHERS THEN
+		ROLLBACK;
+		DBMS_OUTPUT.PUT_LINE('SE REALIZA ROLLBACK DE TRANSACCION: ');
+		DBMS_OUTPUT.PUT_LINE('    ' || SUBSTR(SQLERRM,1, 200));
+		DBMS_OUTPUT.NEW_LINE;
+
+END ACTUALIZAR_BUZON;
 
 
 -- MODULO PRINCIPAL --
-begin
-	dbms_output.put_line('***COMIENZA SCRIPT***');
-	dbms_output.new_line;
+BEGIN
+	DBMS_OUTPUT.PUT_LINE('***COMIENZA SCRIPT***');
+	DBMS_OUTPUT.NEW_LINE;
 
-	for r_reparticion in c_reparticiones loop
-		actualizar_buzon(r_reparticion.codigo_viejo, r_reparticion.codigo_nuevo);		
-	end loop;
+	FOR R_REPARTICION IN C_REPARTICIONES LOOP
+		ACTUALIZAR_BUZON(R_REPARTICION.CODIGO_VIEJO, R_REPARTICION.CODIGO_NUEVO);		
+	END LOOP;
 
-	dbms_output.put_line('***SCRIPT FINALIZADO***');
+	DBMS_OUTPUT.PUT_LINE('***SCRIPT FINALIZADO***');
 
-exception		
-	when others then
-	begin
-		rollback;
-		dbms_output.put_line('SE REALIZA ROLLBACK DE TRANSACCION: ');
-		dbms_output.put_line('    ' || substr(sqlerrm,1, 200));
-	end;
-end;
+EXCEPTION		
+	WHEN OTHERS THEN
+		ROLLBACK;
+		DBMS_OUTPUT.PUT_LINE('SE REALIZA ROLLBACK DE TRANSACCION: ');
+		DBMS_OUTPUT.PUT_LINE('    ' || SUBSTR(SQLERRM,1, 200));
+		
+END;
 
