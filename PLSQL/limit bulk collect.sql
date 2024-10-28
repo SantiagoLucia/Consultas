@@ -1,3 +1,5 @@
+SET SERVEROUTPUT ON
+
 DECLARE
 	TYPE empleado IS RECORD (
         apellido_nombre VARCHAR2(100),
