@@ -1,97 +1,94 @@
-set serveroutput on
-set define off
+SET SERVEROUTPUT ON
+SET DEFINE OFF
 
-declare
+DECLARE
 
--- TABLA CON VALORES A ACTUALIZAR --
-type rec_codigos is record (
-	cod_origen varchar2(100),
-	cod_destino varchar2(100)
+-- TABLA CON VALORES A ACTUALIZAR
+TYPE REC_CODIGOS IS RECORD (
+	COD_ORIGEN VARCHAR2(100),
+	COD_DESTINO VARCHAR2(100)
 );
-
-type table_codigos is table of rec_codigos;
-
-t_codigos table_codigos;
+TYPE TABLE_CODIGOS IS TABLE OF REC_CODIGOS;
+T_CODIGOS TABLE_CODIGOS;
 
 -- FUNCION PARA INICIALIZAR RECORD
-function init_rec(cod_origen varchar2, cod_destino varchar2)
-return rec_codigos
-is r rec_codigos;
-begin
-	r.cod_origen := cod_origen;
-	r.cod_destino := cod_destino;
-	return r;
-end init_rec;
+FUNCTION INIT_REC(
+	COD_ORIGEN VARCHAR2, 
+	COD_DESTINO VARCHAR2
+)
+RETURN REC_CODIGOS
+IS 
+    R REC_CODIGOS;
+BEGIN
+    R.COD_ORIGEN := COD_ORIGEN;
+    R.COD_DESTINO := COD_DESTINO;
+    RETURN R;
+END INIT_REC;
 
--- PROCEDIMIENTO PARA ACTUALIZAR BUZONES --
-procedure actualizar_buzones(
-	p_cod_reparticion_origen in varchar2,
-	p_cod_reparticion_destino in varchar2) 
-is l_registros_modificados number := 0;
-begin
-	dbms_output.put_line('ACTUALIZANDO: '||p_cod_reparticion_origen||' -> '
-         ||p_cod_reparticion_destino);
-	
-	-- inicio bloque update: jbpm4_participation
-	update rce_ged.jbpm4_participation
-	set groupid_ = replace(groupid_, p_cod_reparticion_origen,
-									 p_cod_reparticion_destino)
-	where groupid_ like p_cod_reparticion_origen||'.%';
-	l_registros_modificados := l_registros_modificados + sql%rowcount;
-	-- fin bloque update
+-- PROCEDIMIENTO PARA ACTUALIZAR BUZONES
+PROCEDURE ACTUALIZAR_BUZONES(
+    P_COD_REPARTICION_ORIGEN IN VARCHAR2,
+    P_COD_REPARTICION_DESTINO IN VARCHAR2
+) 
+IS 
+    L_REGISTROS_MODIFICADOS NUMBER := 0;
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('ACTUALIZANDO: ' || P_COD_REPARTICION_ORIGEN || ' -> ' || P_COD_REPARTICION_DESTINO);
+    
+    -- INICIO BLOQUE UPDATE: JBPM4_PARTICIPATION
+    UPDATE RCE_GED.JBPM4_PARTICIPATION
+    SET GROUPID_ = REPLACE(GROUPID_, P_COD_REPARTICION_ORIGEN, P_COD_REPARTICION_DESTINO)
+    WHERE GROUPID_ LIKE P_COD_REPARTICION_ORIGEN || '.%';
+    -- FIN BLOQUE UPDATE
+    
+	L_REGISTROS_MODIFICADOS := L_REGISTROS_MODIFICADOS + SQL%ROWCOUNT;
 
-	-- inicio bloque update: jbpm4_variable
-	update rce_ged.jbpm4_variable
-	set string_value_ = replace(string_value_, p_cod_reparticion_origen,
-									 p_cod_reparticion_destino)
-	where key_ = 'grupoAsignado' and
-	string_value_ like p_cod_reparticion_origen||'.%';
-	l_registros_modificados := l_registros_modificados + sql%rowcount;
-	-- fin bloque update
+    -- INICIO BLOQUE UPDATE: JBPM4_VARIABLE
+    UPDATE RCE_GED.JBPM4_VARIABLE
+    SET STRING_VALUE_ = REPLACE(STRING_VALUE_, P_COD_REPARTICION_ORIGEN, P_COD_REPARTICION_DESTINO)
+    WHERE KEY_ = 'grupoAsignado' AND STRING_VALUE_ LIKE P_COD_REPARTICION_ORIGEN || '.%';
+    -- FIN BLOQUE UPDATE
+    
+	L_REGISTROS_MODIFICADOS := L_REGISTROS_MODIFICADOS + SQL%ROWCOUNT;
 
-	commit; 
-	dbms_output.put_line('Se modificaron '||l_registros_modificados||' registros');
-	dbms_output.put_line('COMMIT REALIZADO');
-	dbms_output.new_line;
+    COMMIT; 
+    DBMS_OUTPUT.PUT_LINE('SE MODIFICARON ' || L_REGISTROS_MODIFICADOS || ' REGISTROS');
+    DBMS_OUTPUT.PUT_LINE('COMMIT REALIZADO');
+    DBMS_OUTPUT.NEW_LINE;
 
-exception		
-	when others then
-	begin
-		rollback;
-		dbms_output.put_line('SE REALIZA ROLLBACK DE TRANSACCION: ');
-		dbms_output.put_line('    ' || substr(sqlerrm,1, 200));
-		dbms_output.new_line;
-	end;   
-end actualizar_buzones;
+EXCEPTION		
+	WHEN OTHERS THEN
+		ROLLBACK;
+		DBMS_OUTPUT.PUT_LINE('SE REALIZA ROLLBACK DE TRANSACCION: ');
+		DBMS_OUTPUT.PUT_LINE('    ' || SUBSTR(SQLERRM,1, 200));
+		DBMS_OUTPUT.NEW_LINE;
+	   
+END ACTUALIZAR_BUZONES;
 
 
--- MODULO PRINCIPAL --	
-begin		
-	dbms_output.put_line('***COMIENZA SCRIPT***');
-	dbms_output.new_line;
-   
-	-- codigos de reparticiones a actualizar --
-	t_codigos := table_codigos(
-		init_rec('DL7664MGGP','DL7664JAGGP'),
-		init_rec('DL7665MGGP','DL7665JAGGP'),
-		init_rec('DL2609MGGP','DL2609JAGGP')
-	);
-	
-	for i in 1..t_codigos.count
-	loop
-		actualizar_buzones(
-			t_codigos(i).cod_origen, 
-			t_codigos(i).cod_destino
-			);
-	end loop;	
-   
-	dbms_output.put_line('***SCRIPT FINALIZADO***');
+-- MODULO PRINCIPAL
+BEGIN		
 
-exception		
-	when others then
-	begin
-		rollback;
-		dbms_output.put_line('SE REALIZA ROLLBACK DE TRANSACCION: ');
-		dbms_output.put_line('    ' || substr(sqlerrm,1, 200));
-	end;
-end;
+DBMS_OUTPUT.PUT_LINE('***COMIENZA SCRIPT***');
+DBMS_OUTPUT.NEW_LINE;
+
+-- CODIGOS DE REPARTICIONES A ACTUALIZAR
+T_CODIGOS := TABLE_CODIGOS(
+	INIT_REC('DL7664MGGP','DL7664JAGGP'),
+	INIT_REC('DL7665MGGP','DL7665JAGGP'),
+	INIT_REC('DL2609MGGP','DL2609JAGGP')
+);
+
+FOR REC IN T_CODIGOS LOOP
+	ACTUALIZAR_BUZONES(REC.COD_ORIGEN, REC.COD_DESTINO);
+END LOOP;	
+
+DBMS_OUTPUT.PUT_LINE('***SCRIPT FINALIZADO***');
+
+EXCEPTION		
+	WHEN OTHERS THEN
+		ROLLBACK;
+		DBMS_OUTPUT.PUT_LINE('SE REALIZA ROLLBACK DE TRANSACCION: ');
+		DBMS_OUTPUT.PUT_LINE('    ' || SUBSTR(SQLERRM,1, 200));
+
+END;
